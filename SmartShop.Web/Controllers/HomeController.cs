@@ -20,6 +20,11 @@ namespace SmartShop.Web.Controllers
             return View();
         }
 
+        public ActionResult Electronics()
+        {
+            return View();
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

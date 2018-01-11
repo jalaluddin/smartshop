@@ -26,8 +26,9 @@ namespace SmartShop.Web
             bundles.Add(new ScriptBundle("~/bundles/theme").Include(
                       "~/Scripts/jquery-2.1.4.min.js",
                       "~/Scripts/simpleCart.min.js",
-                      "~/Scripts/bootstrap-3.1.1.min.js",
+                      "~/Scripts/bootstrap-3.1.1.min.js", 
                       "~/Scripts/jquery.easing.min.js",
+                      "~/Scripts/easyResponsiveTabs.js",
                       "~/Scripts/pignose.layerslider.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
