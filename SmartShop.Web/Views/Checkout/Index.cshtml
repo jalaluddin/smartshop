@@ -31,17 +31,8 @@
                         <div class="rem">
                             <div class="close1"> </div>
                         </div>
-                        <script>
-                             $(document).ready(function(c) {
-								$('.close1').on('click', function(c){
-									$('.rem1').fadeOut('slow', function(c){
-										$('.rem1').remove();
-									});
-									});
-								});
-                        </script>
                     </td>
-                    <td class="invert-image"><a href="single.html"><img src="images/w4.png" alt=" " class="img-responsive" /></a></td>
+                    <td class="invert-image"><a href="single.html"><img src="Content/images/w4.png" alt=" " class="img-responsive" /></a></td>
                     <td class="invert">
                         <div class="quantity">
                             <div class="quantity-select">
@@ -59,17 +50,8 @@
                         <div class="rem">
                             <div class="close2"> </div>
                         </div>
-                        <script>
-                         $(document).ready(function(c) {
-								$('.close2').on('click', function(c){
-									$('.rem2').fadeOut('slow', function(c){
-										$('.rem2').remove();
-									});
-									});
-								});
-                        </script>
                     </td>
-                    <td class="invert-image"><a href="single.html"><img src="images/ep3.png" alt=" " class="img-responsive" /></a></td>
+                    <td class="invert-image"><a href="single.html"><img src="/content/images/ep3.png" alt=" " class="img-responsive" /></a></td>
                     <td class="invert">
                         <div class="quantity">
                             <div class="quantity-select">
@@ -88,17 +70,8 @@
                         <div class="rem">
                             <div class="close3"> </div>
                         </div>
-                        <script>
-                         $(document).ready(function(c) {
-								$('.close3').on('click', function(c){
-									$('.rem3').fadeOut('slow', function(c){
-										$('.rem3').remove();
-									});
-									});
-								});
-                        </script>
                     </td>
-                    <td class="invert-image"><a href="single.html"><img src="images/w2.png" alt=" " class="img-responsive" /></a></td>
+                    <td class="invert-image"><a href="single.html"><img src="/content/images/w2.png" alt=" " class="img-responsive" /></a></td>
                     <td class="invert">
                         <div class="quantity">
                             <div class="quantity-select">
@@ -117,17 +90,8 @@
                         <div class="rem">
                             <div class="close4"> </div>
                         </div>
-                        <script>
-                        $(document).ready(function(c) {
-								$('.close4').on('click', function(c){
-									$('.rem4').fadeOut('slow', function(c){
-										$('.rem4').remove();
-									});
-									});
-								});
-                        </script>
                     </td>
-                    <td class="invert-image"><a href="single.html"><img src="images/w1.png" alt=" " class="img-responsive" /></a></td>
+                    <td class="invert-image"><a href="single.html"><img src="/content/images/w1.png" alt=" " class="img-responsive" /></a></td>
                     <td class="invert">
                         <div class="quantity">
                             <div class="quantity-select">
@@ -169,15 +133,43 @@
 <!-- //check out -->
 
 @section scripts{
-   <script src="js/simpleCart.min.js">
-         $('.value-plus').on('click', function () {
-               var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
-                divUpd.text(newVal);
-          });
+   <script>
+                        $(function () {
+                            $('.value-plus').on('click', function () {
+                                var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
+                                divUpd.text(newVal);
+                            });
 
-           $('.value-minus').on('click', function () {
-                   var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) - 1;
-           });
-</script>
+                            $('.value-minus').on('click', function () {
+                                var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) - 1;
+                                if (newVal >= 1) divUpd.text(newVal);
+                            });
+
+                            $('.close4').on('click', function (c) {
+                                $('.rem4').fadeOut('slow', function (c) {
+                                    $('.rem4').remove();
+                                });
+                            });
+
+                            $('.close3').on('click', function (c) {
+                                $('.rem3').fadeOut('slow', function (c) {
+                                    $('.rem3').remove();
+                                });
+                            });
+
+                            $('.close2').on('click', function (c) {
+                                $('.rem2').fadeOut('slow', function (c) {
+                                    $('.rem2').remove();
+                                });
+                            });
+
+
+                            $('.close1').on('click', function (c) {
+                                $('.rem1').fadeOut('slow', function (c) {
+                                    $('.rem1').remove();
+                                });
+                            });
+                        });
+  </script>
 }
 
