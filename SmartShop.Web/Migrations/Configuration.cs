@@ -9,7 +9,7 @@ namespace SmartShop.Web.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "SmartShop.Web.Models.ApplicationDbContext";
         }
 
