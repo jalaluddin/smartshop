@@ -31,21 +31,7 @@
         <div class="clearfix"></div>
     </div>
 
-    @section scripts2{
-        <script type="text/javascript" src="~/Scripts/pignose.layerslider.js"></script>
-        <script type="text/javascript">
-            //<![CDATA[
-            $(window).load(function () {
-                $('#visual').pignoseLayerSlider({
-                    play: '.btn-play',
-                    pause: '.btn-pause',
-                    next: '.btn-next',
-                    prev: '.btn-prev'
-                });
-            });
-	//]]>
-        </script>
-    }
+ 
 
 </div>
 <!-- //banner -->
@@ -162,21 +148,7 @@
 <div class="product-easy">
     <div class="container">
 
-        @section scripts{
-            
-           
-        <script type="text/javascript">
-							$(document).ready(function () {
-								$('#horizontalTab').easyResponsiveTabs({
-									type: 'default', //Types: default, vertical, accordion
-									width: 'auto', //auto or any width like 600px
-									fit: true   // 100% fit in a container
-								});
-							});
-
-        </script>
-
-        }
+        
         <div class="sap_tabs">
             <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
                 <ul class="resp-tabs-list">
@@ -753,3 +725,31 @@
     </div>
 </div>
 <!-- //product-nav -->
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/pignose.layerslider.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+        $(window).load(function () {
+            $('#visual').pignoseLayerSlider({
+                play: '.btn-play',
+                pause: '.btn-pause',
+                next: '.btn-next',
+                prev: '.btn-prev'
+            });
+        });
+	//]]>
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#horizontalTab').easyResponsiveTabs({
+                type: 'default', //Types: default, vertical, accordion
+                width: 'auto', //auto or any width like 600px
+                fit: true   // 100% fit in a container
+            });
+        });
+
+    </script>
+
+}

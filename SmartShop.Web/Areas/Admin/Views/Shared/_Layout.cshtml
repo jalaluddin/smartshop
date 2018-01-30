@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @Html.Partial("_Header")
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        @Html.Partial("_TopMenu")
+
+        @Html.Partial("_SideMenu")
+
+        @RenderBody()
+    </div>
+    <!-- ./wrapper -->
+
+    @Html.Partial("_Footer")
+
+
+    @Scripts.Render("~/bundles/admin_js")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

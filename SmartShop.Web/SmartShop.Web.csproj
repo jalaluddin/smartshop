@@ -189,6 +189,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\checkoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -289,6 +291,7 @@
     <Content Include="Content\Images\woo1.jpg" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\pignose.layerslider.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -301,6 +304,14 @@
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Database.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_TopMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_SideMenu.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easyResponsiveTabs.js" />
     <Content Include="Scripts\imagezoom.js" />
@@ -363,13 +374,13 @@
     <Content Include="Views\Shared\_FooterTopPartial.cshtml" />
     <Content Include="Views\Shared\_FooterPartial.cshtml" />
     <Content Include="Views\Shared\_PageHeadPartial.cshtml" />
-    <Content Include="Views\Shared\_BannerPartial.cshtml" />
     <Content Include="Views\Shared\_Banner_Partial.cshtml" />
     <Content Include="Views\Home\Electronics.cshtml" />
     <Content Include="Views\Checkout\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
