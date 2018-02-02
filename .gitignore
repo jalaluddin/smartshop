@@ -155,3 +155,5 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/.vs/config/applicationhost.config
+/.vs/SmartShop/v15/sqlite3/*.ide

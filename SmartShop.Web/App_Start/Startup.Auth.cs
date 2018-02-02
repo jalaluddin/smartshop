@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using SmartShop.Web.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using SmartShop.Data;
 
 namespace SmartShop.Web
 {
@@ -63,6 +65,38 @@ namespace SmartShop.Web
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+        }
+
+        public void CreateInitialRolesAndAdminUser()
+        {
+           UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+            if (!roleManager.RoleExists("Admin"))
+            {
+                var adminRoleCreateResult = roleManager.Create(new IdentityRole("Admin"));
+
+                if (adminRoleCreateResult.Succeeded)
+                {
+
+                    if (userManager.FindByName("admin") == null)
+                    {
+                        var adminUser = new ApplicationUser();
+                        adminUser.Email = "admin@smartshop.com";
+                        adminUser.UserName = "admin";
+                        adminUser.Id = IdentityGenerator.NewSequentialGuid().ToString();
+
+                        var adminCreateResult = userManager.Create(adminUser, "hello$123");
+                        if(adminCreateResult.Succeeded)
+                        {
+                            userManager.AddToRole(adminUser.Id, "Admin");
+                        }
+                    }
+                }
+            }
+
+            if(!roleManager.RoleExists("Customer"))
+                roleManager.Create(new IdentityRole("Customer"));
         }
     }
 }

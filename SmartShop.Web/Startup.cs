@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using System;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(SmartShop.Web.Startup))]
@@ -9,6 +10,7 @@ namespace SmartShop.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            CreateInitialRolesAndAdminUser();
         }
     }
 }

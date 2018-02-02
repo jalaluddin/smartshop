@@ -191,6 +191,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\checkoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -312,6 +313,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_TopMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_SideMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Default\Login.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easyResponsiveTabs.js" />
     <Content Include="Scripts\imagezoom.js" />
@@ -404,6 +406,14 @@
     <ProjectReference Include="..\SmartShop.Data\SmartShop.Data.csproj">
       <Project>{74130dea-ea7b-486e-addc-12a8bff6b5e9}</Project>
       <Name>SmartShop.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartShop.Foundation\SmartShop.Foundation.csproj">
+      <Project>{05b640d1-6b9f-4743-bbf2-5c38ec16d290}</Project>
+      <Name>SmartShop.Foundation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartShop.Inventory\SmartShop.Inventory.csproj">
+      <Project>{b6cac28d-e0c6-4d7b-92e8-27943d860719}</Project>
+      <Name>SmartShop.Inventory</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
