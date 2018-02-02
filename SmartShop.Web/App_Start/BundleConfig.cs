@@ -36,6 +36,29 @@ namespace SmartShop.Web
                       "~/Content/jquery-ui.css",
                       "~/Content/style.css",
                       "~/Content/pignose.layerslider.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admin_css").Include(
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/ionicons.min.css",
+                      "~/Content/jquery-jvectormap.css",
+                      "~/Content/AdminLTE.min.css",
+                      "~/Content/_all-skins.min.css"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/admin_js").Include(
+                      "~/Scripts/Admin/jquery.min.js",
+                      "~/Scripts/Admin/bootstrap.min.js",
+                      "~/Scripts/fastclick.js",
+                      "~/Scripts/adminlte.min.js",
+                      "~/Scripts/jquery.sparkline.min.js",
+                      "~/Scripts/jquery-jvectormap-1.2.2.min.js",
+                      "~/Scripts/jquery-jvectormap-world-mill-en.js",
+                      "~/Scripts/jquery.slimscroll.min.js",
+                      "~/Scripts/Chart.min.js",
+                      "~/Scripts/dashboard2.js",
+                      "~/Scripts/demo.js"
+                      ));
         }
     }
 }

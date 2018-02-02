@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartShop.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,19 @@ namespace SmartShop.Web.Controllers
 
         public ActionResult About()
         {
+            SmartShopContext db = new SmartShopContext();
+            ProductUnitOfWork uow = new ProductUnitOfWork(db);
+
+            Product p = new Product();
+            p.ProductName = "Shovon";
+            p.ProductPrice = 100;
+
+            uow.ProductRepository.Add(p);
+
+            uow.Save();
+
+            uow.ProductRepository.GetAll();
+
             ViewBag.Message = "Your application description page.";
 
             return View();
