@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 .DS_Store
 /.vs/config/applicationhost.config
 /.vs/SmartShop/v15/sqlite3/*.ide
+/SmartShop.Web/Database.config
