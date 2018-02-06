@@ -158,3 +158,5 @@ $RECYCLE.BIN/
 /.vs/config/applicationhost.config
 /.vs/SmartShop/v15/sqlite3/*.ide
 /.vs
+/SmartShop.Web/Database.config
+/.vs/SmartShop/v15/Server/sqlite3/storage.ide
