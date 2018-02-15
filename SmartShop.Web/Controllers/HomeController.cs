@@ -1,4 +1,5 @@
 ﻿using SmartShop.Data;
+using SmartShop.Web.App_Start;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace SmartShop.Web.Controllers
     {
         public ActionResult Index()
         {
+            LoggerConfig.Logger.Debug("Hello SmartShop");
             return View();
         }
 
