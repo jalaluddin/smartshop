@@ -1,0 +1,14 @@
+﻿@model SmartShop.Web.Areas.Admin.Models.ProductCategoryModel
+@{
+    ViewBag.Title = "Add";
+    Layout = null;
+}
+
+<form action="/Admin/ProductCategory/Add" method="post">
+    @Html.AntiForgeryToken()
+    @Html.TextBoxFor(m => m.Name)<br />
+    @Html.CheckBoxFor(m => m.IsActive)<br />
+    @Html.TextBoxFor(m => m.ParentCategoryId)
+    <input type="submit" />
+</form>
+
