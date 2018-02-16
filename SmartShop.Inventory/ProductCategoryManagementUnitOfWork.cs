@@ -9,12 +9,12 @@ namespace SmartShop.Inventory
     public class ProductCategoryManagementUnitOfWork : IDisposable
     {
         private ProductManagementContext _context;
-        public ProductCategoryRepository repository { get; set; }
+        public ProductCategoryRepository ProductCategoryRepository { get; set; }
 
         public ProductCategoryManagementUnitOfWork(ProductManagementContext context)
         {
             _context = context;
-            repository = new ProductCategoryRepository(_context);
+            ProductCategoryRepository = new ProductCategoryRepository(_context);
         }
 
         public void Save()
