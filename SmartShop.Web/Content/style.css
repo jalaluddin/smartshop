@@ -143,6 +143,7 @@ label{
     background: url(/Content/Images/arrow.png) no-repeat 92% center #ffffff;
     background-size: 5% !important;
     -webkit-appearance: none;
+    -moz-appearance:none;
 }
 .header-middle form input[type="submit"]{
     background: url(/Content/Images/search.png) no-repeat 4px 0px #fda30e;
