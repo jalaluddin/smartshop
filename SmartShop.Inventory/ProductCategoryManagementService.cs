@@ -24,7 +24,7 @@ namespace SmartShop.Inventory
             productCategory.IsActive = isActive;
             productCategory.ParentCatgory = _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetByID(parentCategoryId);
 
-            _productCategoryManagementUnitOfWork.ProductCategoryRepository.Add(productCategory);
+            _productCategoryManagementUnitOfWork.ProductCategoryRepository.Insert(productCategory);
                        
             _productCategoryManagementUnitOfWork.Save();
         }
