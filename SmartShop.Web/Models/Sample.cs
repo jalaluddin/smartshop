@@ -1,4 +1,5 @@
 ﻿using SmartShop.Data;
+using SmartShop.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SmartShop.Web.Models
 {
     public class Sample
     {
-        internal object GetProblemArchiveJson(DataTablesAjaxRequestModel dataTablesModel, string category, CodingProblemDifficulty? difficulty, string title, int? problemID)
+        internal object GetProblemArchiveJson(DataTablesAjaxRequestModel dataTablesModel/*, string category, CodingProblemDifficulty? difficulty, string title, int? problemID*/)
         {
 
             try
@@ -39,11 +40,19 @@ namespace SmartShop.Web.Models
                     order = string.Format("{0} {1}", sortItems.First<SortElement>().ColumnName, sortItems.First<SortElement>().Order.ToString());
                 }
                 else
+                {
                     order = "CodeName ASC";
+                }
+                    
 
                 //Service Call
-                List<CodingProblem> records = _codingProblemFacade.GetArchiveProblems(pageIndex, pageSize, searchText, category, difficulty, problemID, title, order, out totalRecords, out totalDisplayableRecords);
-                _codingProblems = CodingProblems;
+                // List<ProductCategory> records = _codingProblemFacade.GetArchiveProblems(pageIndex, pageSize, searchText, category, difficulty, problemID, title, order, out totalRecords, out totalDisplayableRecords);
+                // _codingProblems = CodingProblems;
+
+                //*****************************************
+                ProductManagementContext db = new ProductManagementContext();
+                List<ProductCategory> records = db.ProductCategory.OrderBy(u => u.ID).Skip(1).Take(1).ToList();
+                //*****************************************
 
                 // Preparing Json for return
                 var jsonData = new
@@ -54,15 +63,11 @@ namespace SmartShop.Web.Models
                         from record in records
                         select new string[]
                         {
-                            string.Format("{0}-{1}", "DCP", record.CodeName.ToString("00")),
-                            record.Name,
-                            ((int)record.Difficulty).ToString(),
-                            record.CalculateSuccessRate().ToString(),
-                            record.TotalSolve.ToString(),
-                            record.TotalSubmission.ToString(),
-                            record.CodeName.ToString(),
-                            SolveStatus[record.CodeName].ToString(),
-                            uDebugStatus[record.CodeName].ToString()
+                           //sl++.ToString(),
+                            record.ID.ToString(),
+                            record.Name.ToString(),
+                            record.IsActive.ToString(),
+                            record.Name.ToString()
                         }
                     ).ToArray()
                 };
@@ -71,8 +76,8 @@ namespace SmartShop.Web.Models
             }
             catch (Exception ex)
             {
-                _logHelperFactory.Create().WriteLog(LogType.HandledLog, this.GetType().Name,
-                    "GetReviewProblemJson", ex, "Failed to get review problem list");
+                /*_logHelperFactory.Create().WriteLog(LogType.HandledLog, this.GetType().Name,
+                    "GetReviewProblemJson", ex, "Failed to get review problem list");*/
 
                 return DataTablesAjaxRequestModel.EmptyResult;
             }

@@ -15,7 +15,7 @@ namespace SmartShop.Web.Controllers
             return View();
         }
 
-        public JsonResult GetCodingProblemSubCategory(DataTablesAjaxRequestModel datatableModel, Guid? category)
+        /*public JsonResult GetCodingProblemSubCategory(DataTablesAjaxRequestModel datatableModel, Guid? category)
         {
             if (category.HasValue)
             {
@@ -26,6 +26,6 @@ namespace SmartShop.Web.Controllers
             }
             else
                 return Json(null, JsonRequestBehavior.AllowGet);
-        }
+        }*/
     }
 }

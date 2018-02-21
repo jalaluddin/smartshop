@@ -10,6 +10,7 @@ namespace SmartShop.Web.Models
 {
     public class DataTablesAjaxRequestModel
     {
+
         public int iDisplayStart { get; set;}
         public int iDisplayLength { get; set;}
         public int iSortingCols { get; set; }
