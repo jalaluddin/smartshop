@@ -30,10 +30,12 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>SL</th>
+                                    <th>Sl</th>
                                     <th>Category Name</th>
                                     <th>IsActive</th>
                                     <th>Parent Category</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             
@@ -60,9 +62,11 @@
     <script>
         $(document).ready(function () {
             $('#example1').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": "/admin/ProductCategory/GetJsonData"
+                processing: true,
+                serverSide: true,
+                ajax: "/admin/ProductCategory/GetJsonData",
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],	//to add all button
+                pageLength: 10,	//to make default 
             });
         });
     </script>
