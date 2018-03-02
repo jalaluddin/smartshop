@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,9 +19,9 @@ namespace SmartShop.Inventory
             _productCategoryManagementUnitOfWork = new ProductCategoryManagementUnitOfWork(_context);
         }
 
-        public string ViewAll()
+        public IEnumerable<ProductCategory> ViewAll()
         {
-            return JsonConvert.SerializeObject(_productCategoryManagementUnitOfWork.ProductCategoryRepository.Get());
+            return _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get();
         }
 
         public void AddCategory(string name, bool isActive, Guid parentCategoryId)
@@ -34,11 +35,17 @@ namespace SmartShop.Inventory
             _productCategoryManagementUnitOfWork.ProductCategoryRepository.Insert(productCategory);
                        
             _productCategoryManagementUnitOfWork.Save();
-        }
+        }        
 
-        public string GetCodingProblemSubCategoryJson(DataTablesAjaxRequestModel datatableModel, Guid? category)
+        public IEnumerable<ProductCategory> GetCategories(out int total, out int totalDisplay,
+            Expression<Func<ProductCategory, bool>> filter = null,
+            Func<IQueryable<ProductCategory>, IOrderedQueryable<ProductCategory>> orderBy = null,
+            int pageIndex = 1, int pageSize = 10)
         {
-            return JsonConvert.SerializeObject(_productCategoryManagementUnitOfWork.ProductCategoryRepository.Get());
+            total = 0;
+            totalDisplay = 0;
+            return _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get(out total, out totalDisplay, filter, orderBy, 
+                "", pageIndex, pageSize, false);
         }
     }
 }

@@ -14,10 +14,8 @@ namespace SmartShop.Web.Areas.Admin.Controllers
     {        
         // GET: Admin/ProductCategory
         public ActionResult Index()
-        {
-            var productCategoryModel = new ProductCategoryModel();
-            var listOfCategory = productCategoryModel.GetCodingProblemSubCategoryJson();
-            return View(listOfCategory);
+        {            
+            return View();
         }
         public ActionResult Add()
         {
@@ -32,12 +30,12 @@ namespace SmartShop.Web.Areas.Admin.Controllers
             return View(productCategoryModel);
         }
 
-        public JsonResult GetCodingProblemSubCategory(DataTablesAjaxRequestModel datatableModel, Guid? category)
+        public JsonResult GetProductCategory(DataTablesAjaxRequestModel datatableModel, Guid? category)
         {
             if (category.HasValue)
             {
-                ProductCategoryModel productCategoryModel = new ProductCategoryModel();
-                var jsonData = productCategoryModel.GetCodingProblemSubCategoryJson(datatableModel, category.Value);
+                ProductCategoryViewModel productCategoryViewModel = new ProductCategoryViewModel();
+                var jsonData = productCategoryViewModel.GetProductCategoryJson(datatableModel, category.Value);
 
                 return Json(jsonData, JsonRequestBehavior.AllowGet);
             }

@@ -47,10 +47,12 @@ namespace SmartShop.Web
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/admin_js").Include(
-                      "~/Scripts/Admin/jquery.min.js",
+                      "~/Scripts/jquery-2.1.4.min.js",
                       "~/Scripts/Admin/bootstrap.min.js",
                       "~/Scripts/fastclick.js",
                       "~/Scripts/adminlte.min.js",
+                      "~/Scripts/dataTables.bootstrap.min.js",
+                      "~/Scripts/jquery.dataTables.min.js",
                       "~/Scripts/jquery.sparkline.min.js",
                       "~/Scripts/jquery-jvectormap-1.2.2.min.js",
                       "~/Scripts/jquery-jvectormap-world-mill-en.js",

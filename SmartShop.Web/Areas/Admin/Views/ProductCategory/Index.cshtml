@@ -1,11 +1,11 @@
-﻿@model IEnumerable<SmartShop.Inventory.ProductCategory>
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="">
         <div class="page-header">
             <h3>Manage Enroll History</h3>
         </div>
@@ -20,13 +20,10 @@
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="checkall" /></th>
-                            <th>Title</th>
-                            <th>Enrolled By</th>
-                            <th>Mobile</th>
-                            <th>Email</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Created On</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Parent ID</th>
+                            <th>Is Active</th>
                             <th style="width: 100px;">Action</th>
                         </tr>
                     </thead>
@@ -71,8 +68,8 @@
             var table = $('#manageQuestionCategory').dataTable({
                 "bProcessing": true,
                 "bServerSide": true,
-                "sAjaxSource": '/Admin/ManageEnroll/GridDataForEnrollList',
-                "order": [[7, "desc"]],
+                "sAjaxSource": '/Admin/ProductCategory/GetProductCategory',
+                "order": [[2, "desc"]],
                 "columnDefs": [
                     {
                         "render": function (data, type, row) {

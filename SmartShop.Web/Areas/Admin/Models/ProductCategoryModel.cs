@@ -34,7 +34,7 @@ namespace SmartShop.Web.Areas.Admin.Models
             _productCategoryManagementService.AddCategory(name, isActive, parentCategoryId);
         }
 
-        public string GetCodingProblemSubCategoryJson(DataTablesAjaxRequestModel datatableModel, Guid? category)
+        public string GetProductCategoryJson(DataTablesAjaxRequestModel datatableModel, Guid? category)
         {
             return JsonConvert.SerializeObject(_productCategoryManagementService.ViewAll());
         }
