@@ -28,5 +28,24 @@ namespace SmartShop.Inventory
                        
             _productCategoryManagementUnitOfWork.Save();
         }
+
+        public int GetCount()
+        {
+
+            return _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetCount();
+            
+        }
+
+        public List<ProductCategory> GetResult(int start, int length, string searchText, string order/*, out int totalRecords, out int totalDisplayableRecords*/)
+        {
+            List<ProductCategory> records = _context.ProductCategory.
+                // Where(w=> w.Name.Contains("/"+searchText+"/")).
+                OrderBy(o => o.ID).
+                Skip(start).
+                Take(length).ToList();
+
+            return records;
+            //return _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get().ToList(/*totalRecords, totalDisplayableRecords*/);
+        }
     }
 }
