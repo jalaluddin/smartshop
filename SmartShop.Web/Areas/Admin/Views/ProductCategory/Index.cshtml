@@ -1,8 +1,140 @@
-﻿
+﻿@model IEnumerable<SmartShop.Inventory.ProductCategory>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-header">
+            <h3>Manage Enroll History</h3>
+        </div>
+        <div>
+            <a id="deleteitems" class="btn btn-danger btn-squared hide" data="/Admin/ManageQuestionCategory/DeleteQuestionCategory" href="javascript:void(0)">Delete</a>
+        </div>
+        <br />
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="icon-external-link-sign"></i>Enroll History</div>
+            <div class="panel-body table-responsive">
+                <table id="manageQuestionCategory" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="checkall" /></th>
+                            <th>Title</th>
+                            <th>Enrolled By</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Created On</th>
+                            <th style="width: 100px;">Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="updateModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Change enroll status?</h4>
+            </div>
+            <form action="/Admin/ManageEnroll/UpdateStatus" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">Status</label>
+                        <select id="status" name="Status" class="form-control">
+                            <option value="0">Pending</option>
+                            <option value="1">Complete</option>
+                            <option value="2">Cancel</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="EnrollID" id="enroll_id" />
+                    <button type="submit" class="btn btn-danger">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var selectedRows = Array();
+        $(document).ready(function () {
+            var table = $('#manageQuestionCategory').dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": '/Admin/ManageEnroll/GridDataForEnrollList',
+                "order": [[7, "desc"]],
+                "columnDefs": [
+                    {
+                        "render": function (data, type, row) {
+                            return "<input type='checkbox' value='" + data + "'/> ";
+                        },
+                        "sortable": false,
+                        "targets": 0
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return "<a href='/Admin/ManageCourse/Details/" + row[8] + "'>" + data + "</a> ";
+                        },
+                        "sortable": false,
+                        "targets": 1
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return "<a href='/Admin/ManageUser/ViewProfile/" + row[9] + "'>" + data + "</a> ";
+                        },
+                        "sortable": false,
+                        "targets": 2
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return data;
+                        },
+                        "sortable": false,
+                        "targets": 3
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return data;
+                        },
+                        "sortable": false,
+                        "targets": 4
+                    },
+                    {
+                        "render": function (data, type, row) {
+                            return '<button onclick="show_update_modal(\'' + data + '\', ' + row[10] + ')" class="btn delete btn-default btn-sm" title="Delete"><i class="fa fa-cog"></i></button>';
+                        },
+                        'sortable': false,
+                        "targets": 8
+                    }
+                ],
+                "fnDrawCallback": function (oSettings) {
+
+                }
+            });
+
+            $('.dataTables_filter input')
+                .unbind('keypress keyup')
+                .bind('keypress keyup', function (e) {
+                    if ($(this).val().length < 3 && e.keyCode != 13) return;
+                    table.fnFilter($(this).val());
+                });
+        });
+
+        function show_update_modal(id, status) {
+            $('#enroll_id').val(id);
+            $('#status').val(status);
+            $('#updateModal').modal('show');
+        }
+    </script>
+}
 
