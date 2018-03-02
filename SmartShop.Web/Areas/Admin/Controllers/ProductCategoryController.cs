@@ -51,17 +51,19 @@ namespace SmartShop.Web.Areas.Admin.Controllers
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }*/
         
-        public JsonResult GetJsonData()
+        public JsonResult GetJsonData(DataTablesAjaxRequestModel datatableRequest)
         {
             ProductManagementContext db = new ProductManagementContext();
 
             // All Post Data
-            string[] columnOrder = { null, "Name" ,null ,null ,"CreatedAt", null};
-            int start = Convert.ToInt32(Request["start"]);
-            int length = Convert.ToInt32(Request["length"]);
-            string searchValue = Request["search[value]"];
-            string sortColumnName = columnOrder[Convert.ToInt32(Request["order[0][column]"])];
-            string sortDirection = Request["order[0][dir]"];
+            string[] tableColumnmList = { null, "Name" ,null ,null ,"CreatedAt", null};
+
+            int start = datatableRequest.Start;
+            int length = datatableRequest.Length;
+            string searchValue = datatableRequest.GetSearchText();
+
+            string sortColumnName = datatableRequest.GetSortColumnName(tableColumnmList);
+            string sortDirection = datatableRequest.GetSortDirection();
 
 
             List<ProductCategory> records = db.ProductCategory.ToList();
@@ -69,7 +71,11 @@ namespace SmartShop.Web.Areas.Admin.Controllers
             int recordsTotal = records.Count();
             length = (length == -1 ? recordsTotal : length); // To Show All records
             //filter
-            records = records.Where(w => w.Name.ToLower().Contains(searchValue.ToLower())).ToList();
+            if (searchValue != null)
+            {
+                records = records.Where(w => w.Name.ToLower().Contains(searchValue.ToLower())).ToList();
+            }
+            
       
             int recordsFiltered = records.Count();
 
@@ -94,7 +100,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
                             record.IsActive.ToString(),
                             (record.ParentCatgory != null ? record.ParentCatgory.Name.ToString() : "-" ),
                             record.CreatedAt.ToShortDateString(),
-                            "<a href='#'>Delete</a>"
+                            record.ID.ToString(),
                     }
                 );
 

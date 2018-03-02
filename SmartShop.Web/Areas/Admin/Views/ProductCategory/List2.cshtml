@@ -38,7 +38,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            
+
                         </table>
                     </div>
                     <!-- /.box-body -->
@@ -48,10 +48,13 @@
             <!-- /.col -->
         </div>
         <!-- /.row -->
+
     </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
 <!-- DataTables -->
 <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
 @section scripts{
@@ -66,7 +69,21 @@
                 serverSide: true,
                 ajax: "/admin/ProductCategory/GetJsonData",
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],	//to add all button
-                pageLength: 10,	//to make default 
+                pageLength: 10,	//to make default
+
+                columnDefs: [
+                 {
+                    render: function (data, type, row) {
+                        return "<a href='/Admin/ProductCatgory/Delete/" + row[5] +"'>Delete</a>";
+                    },
+                    targets: 5,
+                    searchable: false,
+                    orderable: false
+                 },
+
+                
+
+                ]
             });
         });
     </script>
