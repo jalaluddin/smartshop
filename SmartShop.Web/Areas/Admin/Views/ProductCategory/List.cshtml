@@ -1,7 +1,5 @@
-﻿@model IEnumerable<SmartShop.Inventory.ProductCategory>
-
-@{
-    ViewBag.Title = "List";
+﻿@{
+    ViewBag.Title = "Product Categories";
 }
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -20,7 +18,7 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                
+
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">Product Category</h3>
@@ -30,31 +28,15 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>SL</th>
+                                    <th>Sl</th>
                                     <th>Category Name</th>
                                     <th>IsActive</th>
                                     <th>Parent Category</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @{
-                                    int sno = 1;
-                                }
-                               @foreach (var item in Model)
-                               {
-                                <tr>
-                                    <td>@(sno++)</td>
-                                    <td>@Html.DisplayFor(i=>item.Name)</td>
-                                    <td>@Html.DisplayFor(i => item.IsActive)</td>
-                                    <td>@Html.DisplayFor(i => item.ParentCatgory.Name)</td>
-                                   
-                                </tr>
-                               }
-                                
-                            </tbody>
-                            <tfoot>
-                                
-                            </tfoot>
+                            
                         </table>
                     </div>
                     <!-- /.box-body -->
@@ -68,27 +50,23 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-
 <!-- DataTables -->
 <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
 @section scripts{
-<!-- DataTables -->
-<script src="~/Scripts/jquery.dataTables.min.js"></script>
-<script src="~/Scripts/dataTables.bootstrap.min.js"></script>
-<!-- page script -->
-<script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-</script>    
+    <!-- DataTables -->
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    <!-- page script -->
+    <script>
+        $(document).ready(function () {
+            $('#example1').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "/admin/ProductCategory/GetJsonData",
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],	//to add all button
+                pageLength: 10,	//to make default 
+            });
+        });
+    </script>
 }
 

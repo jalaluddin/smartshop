@@ -200,6 +200,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Models\ProductCategoryListModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductCategoryModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
@@ -214,6 +215,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DataTablesAjaxRequestModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -330,7 +332,6 @@
     <Content Include="Log4net.config" />
     <Content Include="Database.config" />
     <Content Include="Areas\Admin\Views\ProductCategory\List.cshtml" />
-    <Content Include="Areas\Admin\Views\ProductCategory\List2.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dataTables.bootstrap.min.js" />
     <Content Include="Scripts\easyResponsiveTabs.js" />

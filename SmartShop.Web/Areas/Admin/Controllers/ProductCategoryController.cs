@@ -32,78 +32,12 @@ namespace SmartShop.Web.Areas.Admin.Controllers
 
         public ActionResult List()
         {
-            ProductManagementContext db = new ProductManagementContext();
-            ProductCategoryManagementUnitOfWork uow = new ProductCategoryManagementUnitOfWork(db);
-
-             var model = uow.ProductCategoryRepository.Get();
-            return View(model);
-        }
-
-        public ActionResult List2()
-        {
             return View();
         }
 
-        /*public JsonResult GetJsonData(ProductCategoryDatatableModel datatableModel)
+        public JsonResult GetJsonData(DataTablesAjaxRequestModel model)
         {
-            var jsonData = new ProductCategoryDatatableModel().GetProductCategoryJsonData(datatableModel);
-
-            return Json(jsonData, JsonRequestBehavior.AllowGet);
-        }*/
-        
-        public JsonResult GetJsonData()
-        {
-            ProductManagementContext db = new ProductManagementContext();
-
-            // All Post Data
-            string[] columnOrder = { null, "Name" ,null ,null ,"CreatedAt", null};
-            int start = Convert.ToInt32(Request["start"]);
-            int length = Convert.ToInt32(Request["length"]);
-            string searchValue = Request["search[value]"];
-            string sortColumnName = columnOrder[Convert.ToInt32(Request["order[0][column]"])];
-            string sortDirection = Request["order[0][dir]"];
-
-
-            List<ProductCategory> records = db.ProductCategory.ToList();
-
-            int recordsTotal = records.Count();
-            length = (length == -1 ? recordsTotal : length); // To Show All records
-            //filter
-            records = records.Where(w => w.Name.ToLower().Contains(searchValue.ToLower())).ToList();
-      
-            int recordsFiltered = records.Count();
-
-            //sorting (required System.Linq.Dynamic)
-            if(sortColumnName != null)
-            {
-                records = records.OrderBy(sortColumnName+" "+ sortDirection).ToList();
-            }
-             
-            //Paging
-
-            records = records.Skip(start).Take(length).ToList();
-
-            
-
-            int serial = start + 1;
-            var dataSet = (
-                    from record in records
-                    select new string[]
-                    {       serial++.ToString(),
-                            record.Name.ToString(),
-                            record.IsActive.ToString(),
-                            (record.ParentCatgory != null ? record.ParentCatgory.Name.ToString() : "-" ),
-                            record.CreatedAt.ToShortDateString(),
-                            "<a href='#'>Delete</a>"
-                    }
-                );
-
-            var jsonData = new
-            {
-                recordsTotal = recordsTotal,
-                recordsFiltered = recordsFiltered,
-                data = dataSet
-            };
+            var jsonData = new ProductCategoryListModel().GetProductCategoryJson(model);
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
