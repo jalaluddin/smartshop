@@ -36,16 +36,14 @@ namespace SmartShop.Inventory
             
         }
 
-        public List<ProductCategory> GetResult(int start, int length, string searchText, string order/*, out int totalRecords, out int totalDisplayableRecords*/)
+        public List<ProductCategory> GetPagedCategories(int start, int length, string searchValue, 
+            string sortColumnName, string sortDirection, out int recordsTotal, out int recordsFiltered)
         {
-            List<ProductCategory> records = _context.ProductCategory.
-                // Where(w=> w.Name.Contains("/"+searchText+"/")).
-                OrderBy(o => o.ID).
-                Skip(start).
-                Take(length).ToList();
+            recordsTotal = 0;
+            recordsFiltered = 0;
 
-            return records;
-            //return _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get().ToList(/*totalRecords, totalDisplayableRecords*/);
+            return _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetDynamic(out recordsTotal, out recordsFiltered,
+                x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", start, length).ToList();
         }
     }
 }
