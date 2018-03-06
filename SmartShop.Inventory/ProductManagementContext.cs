@@ -19,6 +19,8 @@ namespace SmartShop.Inventory
 
         public DbSet<ProductCategory> ProductCategory { get; set; }
 
+        public DbSet<Product> Product { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

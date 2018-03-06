@@ -14,7 +14,7 @@ namespace SmartShop.Data
         {
 
         }
-        public DbSet<Product> product { get; set; }
+       
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

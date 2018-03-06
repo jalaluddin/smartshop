@@ -47,11 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Product.cs" />
     <Compile Include="ProductCategory.cs" />
     <Compile Include="ProductCategoryManagementService.cs" />
     <Compile Include="ProductCategoryManagementUnitOfWork.cs" />
     <Compile Include="ProductCategoryRepository.cs" />
     <Compile Include="ProductManagementContext.cs" />
+    <Compile Include="ProductManagementService.cs" />
+    <Compile Include="ProductManagementUnitOfWork.cs" />
+    <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

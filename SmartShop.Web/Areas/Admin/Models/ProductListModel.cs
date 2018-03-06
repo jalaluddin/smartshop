@@ -7,21 +7,17 @@ using System.Web;
 
 namespace SmartShop.Web.Areas.Admin.Models
 {
-    public class ProductCategoryListModel
+    public class ProductListModel
     {
-        private ProductCategoryManagementService _productCategoryManagementService;
-
-        public List<ProductCategory> Categories { get; private set; }
-
-        public ProductCategoryListModel()
+        private ProductManagementService _productManagementService;
+        public ProductListModel()
         {
-            _productCategoryManagementService = new ProductCategoryManagementService();
+            _productManagementService = new ProductManagementService();
         }
-
-        public object GetProductCategoryJson(DataTablesAjaxRequestModel model)
+        public object GetProductJsonData(DataTablesAjaxRequestModel model)
         {
             // All Post Data
-            string[] columnOrder = { null, "Name", null, null, "CreatedAt", null };
+            string[] columnOrder = { null, "Name", "Price", null, null, null };
             int index = model.GetPageIndex();
             int length = model.GetPageSize();
             string searchValue = model.GetSearchText();
@@ -30,7 +26,7 @@ namespace SmartShop.Web.Areas.Admin.Models
 
             int recordsTotal = 0;
             int recordsFiltered = 0;
-            List<ProductCategory> records = _productCategoryManagementService.GetPagedCategories(index, length, searchValue, 
+            List<Product> records = _productManagementService.GetPagedProducts(index, length, searchValue,
                 sortColumnName, sortDirection, out recordsTotal, out recordsFiltered);
 
             int serial = (index * length) + 1;
@@ -39,15 +35,14 @@ namespace SmartShop.Web.Areas.Admin.Models
                     select new string[]
                     {       serial++.ToString(),
                             record.Name.ToString(),
-                            record.IsActive.ToString(),
-                            (record.ParentCatgory != null ? record.ParentCatgory.Name.ToString() : "-" ),
+                            record.Price.ToString(),
                             record.CreatedAt.ToShortDateString(),
                             record.ID.ToString()
                     }
                 );
 
             var jsonData = new
-            { 
+            {
                 recordsTotal = recordsTotal,
                 recordsFiltered = recordsFiltered,
                 data = dataSet
