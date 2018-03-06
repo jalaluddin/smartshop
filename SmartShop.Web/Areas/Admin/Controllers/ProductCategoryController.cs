@@ -44,12 +44,22 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(Guid? id)
+        public ActionResult List(Guid? id)
         {
-            var model = new ProductCategoryModel();
-            model.DeleteProductCategory(id);
+            try
+            {
+                var model = new ProductCategoryModel();
+                model.DeleteProductCategory(id);
+                ViewBag.Message = "Successfuly deleted item.";
+                ViewBag.Success = true;
+            }
+            catch
+            {
+                ViewBag.Message = "Failed to delete item.";
+                ViewBag.Success = false;
+            }
 
-            return RedirectToAction("List");
+            return View();
         }
     }
 }
