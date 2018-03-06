@@ -23,5 +23,11 @@ namespace SmartShop.Web.Areas.Admin.Models
         {
             _productCategoryManagementService.AddCategory(name, isActive, parentCategoryId);
         }
+
+        internal void DeleteProductCategory(Guid? id)
+        {
+            if(id.HasValue)
+                _productCategoryManagementService.DeleteCategory(id.Value);
+        }
     }
 }

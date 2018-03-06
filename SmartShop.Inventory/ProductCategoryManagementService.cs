@@ -29,6 +29,12 @@ namespace SmartShop.Inventory
             _productCategoryManagementUnitOfWork.Save();
         }
 
+        public void DeleteCategory(Guid id)
+        {
+            _productCategoryManagementUnitOfWork.ProductCategoryRepository.Delete(id);
+            _productCategoryManagementUnitOfWork.Save();
+        }
+
         public int GetCount()
         {
 

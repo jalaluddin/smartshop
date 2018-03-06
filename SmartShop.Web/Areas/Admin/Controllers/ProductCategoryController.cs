@@ -10,6 +10,7 @@ using System.Linq.Dynamic;
 
 namespace SmartShop.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ProductCategoryController : Controller
     {        
         // GET: Admin/ProductCategory
@@ -40,6 +41,15 @@ namespace SmartShop.Web.Areas.Admin.Controllers
             var jsonData = new ProductCategoryListModel().GetProductCategoryJson(model);
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Guid? id)
+        {
+            var model = new ProductCategoryModel();
+            model.DeleteProductCategory(id);
+
+            return RedirectToAction("List");
         }
     }
 }
