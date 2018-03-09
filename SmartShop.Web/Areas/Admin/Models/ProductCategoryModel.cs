@@ -10,6 +10,7 @@ namespace SmartShop.Web.Areas.Admin.Models
     {
         private ProductCategoryManagementService _productCategoryManagementService;
 
+        public Guid ID { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; }
         public Guid ParentCategoryId { get; set; }
@@ -18,6 +19,15 @@ namespace SmartShop.Web.Areas.Admin.Models
         public ProductCategoryModel()
         {
             _productCategoryManagementService = new ProductCategoryManagementService();
+        }
+        public ProductCategoryModel(Guid id)
+        {
+            _productCategoryManagementService = new ProductCategoryManagementService();
+            var category=_productCategoryManagementService.GetProductCategory(id);
+
+            this.ID = category.ID;
+            this.Name = category.Name;
+            this.IsActive = category.IsActive;
         }
         public void AddCategory(string name, bool isActive, Guid parentCategoryId)
         {
@@ -28,6 +38,19 @@ namespace SmartShop.Web.Areas.Admin.Models
         {
             if(id.HasValue)
                 _productCategoryManagementService.DeleteCategory(id.Value);
+        }
+
+        public ProductCategory LoadProductCategoryData(Guid? id)
+        {
+            if (id.HasValue)
+            {
+                return _productCategoryManagementService.GetProductCategory(id.Value);
+            }
+            else
+            {
+                throw new Exception();
+            }
+                
         }
     }
 }

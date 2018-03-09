@@ -61,5 +61,12 @@ namespace SmartShop.Web.Areas.Admin.Controllers
 
             return View();
         }
+
+        public ActionResult Edit(Guid? id)
+        {
+
+            var model = new ProductCategoryModel(id.Value);
+            return View(model);
+        }
     }
 }

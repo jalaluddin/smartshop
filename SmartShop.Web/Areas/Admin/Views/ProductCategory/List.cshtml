@@ -100,8 +100,8 @@
                 pageLength: 10,	//to make default 
 
                 columnDefs: [{
-                        render: function (data, type, row) {
-                            return "<button onclick=\"showModal('" + data + "')\" >Delete</button>";
+                    render: function (data, type, row) {
+                        return "<a href=\"/admin/ProductCategory/Edit/" + data + "\" class=\"btn btn-info\">Edit</a>&nbsp;<button onclick=\"showModal('" + data + "')\"  class=\"btn btn-danger\">Delete</button>";
                         },
                         targets: 5
                     }
