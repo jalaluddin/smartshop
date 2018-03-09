@@ -13,12 +13,14 @@ namespace SmartShop.Web.Areas.Admin.Models
         public Guid ID { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; }
+        public List<ProductCategory> ParentCategories { get; set; }
         public Guid ParentCategoryId { get; set; }
 
 
         public ProductCategoryModel()
         {
             _productCategoryManagementService = new ProductCategoryManagementService();
+            ParentCategories = GetAllCategories();
         }
         public ProductCategoryModel(Guid id)
         {
@@ -51,6 +53,11 @@ namespace SmartShop.Web.Areas.Admin.Models
                 throw new Exception();
             }
                 
+        }
+
+        public List<ProductCategory> GetAllCategories()
+        {
+            return _productCategoryManagementService.GetAllCategories();
         }
     }
 }

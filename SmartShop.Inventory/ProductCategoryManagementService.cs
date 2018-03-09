@@ -58,5 +58,10 @@ namespace SmartShop.Inventory
             return _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetByID(id);
         }
 
+
+        public List<ProductCategory> GetAllCategories()
+        {
+            return _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get(null, null, "", false).ToList();
+        }
     }
 }
