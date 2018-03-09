@@ -51,5 +51,10 @@ namespace SmartShop.Inventory
             return _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetDynamic(out recordsTotal, out recordsFiltered,
                 x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", start, length).ToList();
         }
+
+        public List<ProductCategory> GetAllCategories()
+        {
+            return _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get(null, null, "", false).ToList();
+        }
     }
 }
