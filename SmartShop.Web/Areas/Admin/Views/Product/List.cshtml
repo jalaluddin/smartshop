@@ -40,8 +40,13 @@
                                 <tr>
                                     <th>Sl</th>
                                     <th>Name</th>
-                                    <th>Price</th>
                                     <th>Category Name</th>
+                                    <th>Price</th>
+                                    <th>Special Price</th>
+                                    <th>Quantity</th>
+                                    <th>FeaturedImage</th>
+                                    <th>IsNew</th>
+                                    <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -97,7 +102,7 @@
             $('#example1').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "/admin/Product/GetJsonData",
+                ajax: "/Admin/Product/GetJsonData",
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],	//to add all button
                 pageLength: 10,	//to make default
 
