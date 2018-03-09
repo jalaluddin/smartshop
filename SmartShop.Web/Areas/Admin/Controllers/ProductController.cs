@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace SmartShop.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         // GET: Admin/Product
@@ -19,14 +20,6 @@ namespace SmartShop.Web.Areas.Admin.Controllers
 
         public ActionResult Add()
         {
-            ProductManagementContext db = new ProductManagementContext();
-            Product p = new Product();
-            //p.ID = new Guid();
-            p.Name = "Test";
-            p.Price = 100;
-
-            db.Product.Add(p);
-            db.SaveChanges();
 
             return View();
         }
@@ -42,6 +35,25 @@ namespace SmartShop.Web.Areas.Admin.Controllers
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public ActionResult Delete(Guid? id)
+        {
+            try
+            {
+                
+                new PorductModel().DeleteProduct(id);
+                TempData["message"] = "Successfully Deleted";
+                TempData["alertType"] = "success";
+
+            }
+            catch
+            {
+                TempData["message"] = "Failed to Deleted";
+                TempData["alertType"] = "danger";
+            }
+
+            return RedirectToAction("List");
         }
     }
 }

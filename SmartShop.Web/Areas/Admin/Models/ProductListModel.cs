@@ -28,8 +28,8 @@ namespace SmartShop.Web.Areas.Admin.Models
             int recordsFiltered = 0;
             List<Product> records = _productManagementService.GetPagedProducts(index, length, searchValue,
                 sortColumnName, sortDirection, out recordsTotal, out recordsFiltered);
-
-            int serial = (index * length) + 1;
+            
+            int serial = model.GetSerialNumber();
             var dataSet = (
                     from record in records
                     select new string[]

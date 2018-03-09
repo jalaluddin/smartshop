@@ -201,6 +201,7 @@
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Admin\Models\PorductModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductCategoryListModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductCategoryModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductListModel.cs" />

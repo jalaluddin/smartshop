@@ -42,14 +42,14 @@ namespace SmartShop.Inventory
             
         }
 
-        public List<ProductCategory> GetPagedCategories(int start, int length, string searchValue, 
+        public List<ProductCategory> GetPagedCategories(int index, int length, string searchValue, 
             string sortColumnName, string sortDirection, out int recordsTotal, out int recordsFiltered)
         {
             recordsTotal = 0;
             recordsFiltered = 0;
 
             return _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetDynamic(out recordsTotal, out recordsFiltered,
-                x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", start, length).ToList();
+                x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", index, length).ToList();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace SmartShop.Web.Areas.Admin.Models
             List<ProductCategory> records = _productCategoryManagementService.GetPagedCategories(index, length, searchValue, 
                 sortColumnName, sortDirection, out recordsTotal, out recordsFiltered);
 
-            int serial = (index * length) + 1;
+            int serial = model.GetSerialNumber();
             var dataSet = (
                     from record in records
                     select new string[]

@@ -16,14 +16,20 @@ namespace SmartShop.Inventory
             _context = new ProductManagementContext();
             _productManagementUnitOfWork = new ProductManagementUnitOfWork(_context);
         }
-        public List<Product> GetPagedProducts(int start, int length, string searchValue,
+        public List<Product> GetPagedProducts(int index, int length, string searchValue,
             string sortColumnName, string sortDirection, out int recordsTotal, out int recordsFiltered)
         {
             recordsTotal = 0;
             recordsFiltered = 0;
 
             return _productManagementUnitOfWork.ProductRepository.GetDynamic(out recordsTotal, out recordsFiltered,
-                x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", start, length).ToList();
+                x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", index, length).ToList();
+        }
+
+        public void DeleteProduct(Guid id)
+        {
+            _productManagementUnitOfWork.ProductRepository.Delete(id);
+            _productManagementUnitOfWork.Save();
         }
     }
 }
