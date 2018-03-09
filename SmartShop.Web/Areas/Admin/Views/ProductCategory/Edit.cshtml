@@ -38,12 +38,11 @@
                                     @Html.CheckBoxFor(m => m.IsActive)
 
                                 </div>
-                                <div class="form-group">
-                                    <label>Parent Category</label>
-                                    <select name="ParentCategoryId" class="form-control">
-                                        <option value=""></option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label>Parent Category</label>
+                        
+                                @Html.DropDownListFor(m => m.ParentCategoryId, new SelectList(Model.ParentCategories, "Id", "Name"), "", new { @class = "form-control" })
+                            </div>
                             </div>
                         <!-- /.box-body -->
                         <div class="box-footer">

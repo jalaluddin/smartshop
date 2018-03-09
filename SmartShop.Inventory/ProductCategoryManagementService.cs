@@ -63,5 +63,17 @@ namespace SmartShop.Inventory
         {
             return _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get(null, null, "", false).ToList();
         }
+
+        public void UpdateCategory(Guid id,string name, bool isActive, Guid parentCategoryId)
+        {
+            ProductCategory productCategory = _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetByID(id);
+            
+            productCategory.Name = name;
+            productCategory.IsActive = isActive;
+            productCategory.ParentCatgory = _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetByID(parentCategoryId);
+
+           
+            _productCategoryManagementUnitOfWork.Save();
+        }
     }
 }
