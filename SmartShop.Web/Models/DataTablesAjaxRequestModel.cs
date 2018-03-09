@@ -45,6 +45,11 @@ namespace SmartShop.Web.Models
             else
                 return Length;
         }
+
+        public int GetSerialNumber()
+        {
+            return Start + 1;
+        }
     }
 }
  
