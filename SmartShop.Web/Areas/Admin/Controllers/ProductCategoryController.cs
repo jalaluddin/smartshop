@@ -13,6 +13,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
     [Authorize]
     public class ProductCategoryController : Controller
     {        
+        
         // GET: Admin/ProductCategory
         public ActionResult Index()
         {
@@ -20,7 +21,8 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         }
         public ActionResult Add()
         {
-            var productCategoryModel = new ProductCategoryModel();
+            var productCategoryModel = new ProductCategoryModel();            
+            
             return View(productCategoryModel);
         }
 

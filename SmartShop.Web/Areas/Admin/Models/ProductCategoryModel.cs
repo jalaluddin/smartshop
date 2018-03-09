@@ -12,12 +12,14 @@ namespace SmartShop.Web.Areas.Admin.Models
 
         public string Name { get; set; }
         public bool IsActive { get; set; }
+        public List<ProductCategory> ParentCategories { get; set; }
         public Guid ParentCategoryId { get; set; }
 
 
         public ProductCategoryModel()
         {
             _productCategoryManagementService = new ProductCategoryManagementService();
+            ParentCategories = GetAllCategories();
         }
         public void AddCategory(string name, bool isActive, Guid parentCategoryId)
         {
@@ -28,6 +30,11 @@ namespace SmartShop.Web.Areas.Admin.Models
         {
             if(id.HasValue)
                 _productCategoryManagementService.DeleteCategory(id.Value);
+        }
+
+        public List<ProductCategory> GetAllCategories()
+        {
+            return _productCategoryManagementService.GetAllCategories();
         }
     }
 }
