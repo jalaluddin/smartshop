@@ -10,6 +10,7 @@ namespace SmartShop.Web.Areas.Admin.Models
     public class ProductListModel
     {
         private ProductManagementService _productManagementService;
+        public List<Product> Products { get; private set; }
         public ProductListModel()
         {
             _productManagementService = new ProductManagementService();
@@ -17,7 +18,7 @@ namespace SmartShop.Web.Areas.Admin.Models
         public object GetProductJsonData(DataTablesAjaxRequestModel model)
         {
             // All Post Data
-            string[] columnOrder = { null, "Name", "Price", null, null, null };
+            string[] columnOrder = { null, "Name", null, null,  null, null, null, null, null };
             int index = model.GetPageIndex();
             int length = model.GetPageSize();
             string searchValue = model.GetSearchText();
@@ -33,11 +34,16 @@ namespace SmartShop.Web.Areas.Admin.Models
             var dataSet = (
                     from record in records
                     select new string[]
-                    {       serial++.ToString(),
-                            record.Name.ToString(),
-                            record.Price.ToString(),
-                            record.CreatedAt.ToShortDateString(),
-                            record.ID.ToString()
+                    {
+                        serial++.ToString(),
+                        record.Name.ToString(),
+                        (record.ProductCategory != null ? record.ProductCategory.Name.ToString() : "-" ),
+                        record.Price.ToString(),
+                        record.SpecialPrice.ToString(),
+                        record.Quantity.ToString(),
+                        (record.FeaturedImage != null ? record.FeaturedImage.ToString() : "-" ),
+                        record.IsNew.ToString(),
+                        record.ID.ToString()
                     }
                 );
 

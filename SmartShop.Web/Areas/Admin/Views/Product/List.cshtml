@@ -40,8 +40,12 @@
                                 <tr>
                                     <th>Sl</th>
                                     <th>Name</th>
-                                    <th>Price</th>
                                     <th>Category Name</th>
+                                    <th>Price</th>
+                                    <th>Special Price</th>
+                                    <th>Quantity</th>
+                                    <th>FeaturedImage</th>
+                                    <th>IsNew</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -63,7 +67,7 @@
 <div class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="/Admin/Product/Delete" method="post">
+            <form action="/Admin/Product/List" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title">Delete Item</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -97,7 +101,7 @@
             $('#example1').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "/admin/Product/GetJsonData",
+                ajax: "/Admin/Product/GetJsonData",
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],	//to add all button
                 pageLength: 10,	//to make default
 
@@ -105,7 +109,7 @@
                         render: function (data, type, row) {
                             return "<button onclick=\"showModal('" + data + "')\" >Delete</button>";
                         },
-                        targets: 4
+                        targets: 8
                     }
                 ]
             });
