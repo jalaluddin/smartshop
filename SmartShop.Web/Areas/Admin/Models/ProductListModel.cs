@@ -18,7 +18,7 @@ namespace SmartShop.Web.Areas.Admin.Models
         public object GetProductJsonData(DataTablesAjaxRequestModel model)
         {
             // All Post Data
-            string[] columnOrder = { null, "Name", null, null,  null, null, null, null, null, null };
+            string[] columnOrder = { null, "Name", null, null,  null, null, null, null, null };
             int index = model.GetPageIndex();
             int length = model.GetPageSize();
             string searchValue = model.GetSearchText();
@@ -37,13 +37,12 @@ namespace SmartShop.Web.Areas.Admin.Models
                     {
                         serial++.ToString(),
                         record.Name.ToString(),
-                        record.ProductCategory.Name.ToString(),
+                        (record.ProductCategory != null ? record.ProductCategory.Name.ToString() : "-" ),
                         record.Price.ToString(),
                         record.SpecialPrice.ToString(),
                         record.Quantity.ToString(),
-                        record.FeaturedImage.ToString(),
+                        (record.FeaturedImage != null ? record.FeaturedImage.ToString() : "-" ),
                         record.IsNew.ToString(),
-                        record.CreatedAt.ToShortDateString(),
                         record.ID.ToString()
                     }
                 );
