@@ -52,9 +52,28 @@ namespace SmartShop.Inventory
                 x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", index, length).ToList();
         }
 
+
+        public ProductCategory GetProductCategory(Guid id)
+        {
+            return _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetByID(id);
+        }
+
+
         public List<ProductCategory> GetAllCategories()
         {
             return _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get(null, null, "", false).ToList();
+        }
+
+        public void UpdateCategory(Guid id,string name, bool isActive, Guid parentCategoryId)
+        {
+            ProductCategory productCategory = _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetByID(id);
+            
+            productCategory.Name = name;
+            productCategory.IsActive = isActive;
+            productCategory.ParentCatgory = _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetByID(parentCategoryId);
+
+           
+            _productCategoryManagementUnitOfWork.Save();
         }
     }
 }
