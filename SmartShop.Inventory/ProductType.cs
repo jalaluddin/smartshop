@@ -1,6 +1,8 @@
-﻿namespace SmartShop.Inventory
+﻿using SmartShop.Data;
+
+namespace SmartShop.Inventory
 {
-    public class ProductType
+    public class ProductType : Entity 
     {
         public string Name { get; set; }
     }

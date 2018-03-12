@@ -1,6 +1,8 @@
-﻿namespace SmartShop.Inventory
+﻿using SmartShop.Data;
+
+namespace SmartShop.Inventory
 {
-    public class ProductReviews
+    public class ProductReviews : Entity 
     {
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
