@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SmartShop.Web.Areas.Admin.Models;
+using SmartShop.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +14,13 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public JsonResult GetJsonData(DataTablesAjaxRequestModel request)
+        {
+            var jsonData = new CustomerModel().GetCustomerJsonData(request);
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SmartShop.Inventory
         public ProductManagementContext()
             :base("DefaultConnection")
         {
-
+            Database.SetInitializer<ProductManagementContext>(null);
         }
 
         public DbSet<ProductCategory> ProductCategory { get; set; }
