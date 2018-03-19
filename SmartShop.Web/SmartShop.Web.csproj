@@ -203,10 +203,10 @@
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Models\CustomerModel.cs" />
-    <Compile Include="Areas\Admin\Models\PorductModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductCategoryListModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductCategoryModel.cs" />
     <Compile Include="Areas\Admin\Models\ProductListModel.cs" />
+    <Compile Include="Areas\Admin\Models\ProductModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -458,7 +458,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>19499</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -7,7 +7,7 @@ using System.Linq.Dynamic;
 
 namespace SmartShop.Data
 {
-    public class Repository<T> : IRepository<T> where T : Entity
+    public class Repository<T> : IRepository<T> where T : class
     {
         private DbContext _context;
         public Repository(DbContext context)
@@ -180,7 +180,7 @@ namespace SmartShop.Data
             else
             {
                 IQueryable<T> query = _context.Set<T>();
-                query = query.Where(x => x.ID == (Guid)id);
+                //query = query.Where(x => x.ID == (Guid)id);
 
                 foreach (var includeProperty in includeProperties.Split
                     (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace SmartShop.Data
 {
-    public interface IRepository<T> where T : Entity
+    public interface IRepository<T> where T : class
     {
         void Delete(Expression<Func<T, bool>> filter);
         void Delete(object id);

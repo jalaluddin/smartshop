@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SmartShop.Foundation
 {
     [Table("AspNetUsers")]
-    public class Customer :Entity
+    public class Customer
     {
         public string Email { get; set; }
         public string UserName { get; set; }
