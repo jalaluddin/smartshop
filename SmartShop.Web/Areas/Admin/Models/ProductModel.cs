@@ -1,6 +1,7 @@
 ﻿using SmartShop.Inventory;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -38,7 +39,7 @@ namespace SmartShop.Web.Areas.Admin.Models
         {
             if(featuredImageFile != null)
             {
-                string uploadPath = "~/Temp";
+                string uploadPath = ConfigurationManager.AppSettings["TemporaryFileLocation"];
                 string originalName = featuredImageFile.FileName;
                 string newName = Guid.NewGuid().ToString().Replace("-", "") + originalName.Substring(originalName.IndexOf('.'));
                 string fullPath = uploadPath + "/" + newName;
