@@ -20,8 +20,16 @@ namespace SmartShop.Web.Areas.Admin.Controllers
 
         public ActionResult Add()
         {
+            var productModel = new ProductModel();
 
-            return View();
+            return View(productModel);
+        }
+
+        [HttpPost]
+        public ActionResult Add(ProductModel productModel )
+        {
+            productModel.AddProduct(productModel.Name, productModel.Price, productModel.ProductCategoryId, productModel.SpecialPrice, productModel.Quantity, productModel.Description, productModel.IsNew);
+            return View(productModel);
         }
 
         public ActionResult List()
@@ -42,7 +50,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
             try
             {
                 
-                new PorductModel().DeleteProduct(id);
+                new ProductModel().DeleteProduct(id);
                 TempData["message"] = "Successfully Deleted";
                 TempData["alertType"] = "success";
 
