@@ -12,7 +12,7 @@ namespace SmartShop.Data
     {
         public SmartShopContext() : base("DefaultConnection")
         {
-
+           
         }
        
 

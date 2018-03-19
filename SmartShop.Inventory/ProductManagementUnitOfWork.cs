@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartShop.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,25 +7,15 @@ using System.Threading.Tasks;
 
 namespace SmartShop.Inventory
 {
-    public class ProductManagementUnitOfWork
+    public class ProductManagementUnitOfWork : UnitOfWork
     {
-        private ProductManagementContext _context;
         public ProductRepository ProductRepository { get; set; }
 
-        public ProductManagementUnitOfWork(ProductManagementContext context)
+        public ProductManagementUnitOfWork(ProductManagementContext context) :base(context)
         {
-            _context = context;
-            ProductRepository = new ProductRepository(_context);
+            ProductRepository = new ProductRepository(context);
         }
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

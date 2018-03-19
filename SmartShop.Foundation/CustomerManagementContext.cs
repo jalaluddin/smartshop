@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartShop.Inventory
+namespace SmartShop.Foundation
 {
-    public class ProductManagementContext : DbContext 
+    public class CustomerManagementContext : DbContext
     {
-        public ProductManagementContext()
-            :base("DefaultConnection")
+        public CustomerManagementContext()
+            : base("DefaultConnection")
         {
-            Database.SetInitializer<ProductManagementContext>(null);
+            Database.SetInitializer<CustomerManagementContext>(null);
         }
 
-        public DbSet<ProductCategory> ProductCategory { get; set; }
-
-        public DbSet<Product> Product { get; set; }
-
+        public DbSet<Customer> Customer { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
