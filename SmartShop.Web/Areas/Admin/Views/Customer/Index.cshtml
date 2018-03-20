@@ -96,21 +96,21 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],	//to add all button
                 pageLength: 10,	//to make default
 
-                columnDefs: [{
-                    render: function (data, type, row) {
-                        return "<a href=\"/admin/ProductCategory/Edit/" + data + "\" class=\"btn btn-info\">Edit</a>&nbsp;<button onclick=\"showModal('" + data + "')\"  class=\"btn btn-danger\">Delete</button>";
-                        },
-                        targets: 2
-                    }
-                ]
+                //columnDefs: [{
+                //    render: function (data, type, row) {
+                //        return "<a href=\"/admin/ProductCategory/Edit/" + data + "\" class=\"btn btn-info\">Edit</a>&nbsp;<button onclick=\"showModal('" + data + "')\"  class=\"btn btn-danger\">Delete</button>";
+                //        },
+                //        targets: 2
+                //    }
+                //]
             });
         });
 
-        function showModal(id)
-        {
-            $("#id").val(id);
-            $('.modal').modal('show')
-        }
+        //function showModal(id)
+        //{
+        //    $("#id").val(id);
+        //    $('.modal').modal('show')
+        //}
     </script>
 }
 

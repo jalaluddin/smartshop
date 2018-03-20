@@ -20,6 +20,15 @@ namespace SmartShop.Foundation
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder
+                .Entity<Customer>()
+                .HasMany<Role>(x => x.Roles)
+                .WithMany(x => x.Customers)
+                .Map(y => 
+                    y.MapLeftKey("UserId")
+                    .MapRightKey("RoleId")
+                    .ToTable("AspNetUserRoles")
+                );
         }
     }
 }

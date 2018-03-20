@@ -12,7 +12,7 @@ namespace SmartShop.Web.Controllers
     {
         public ActionResult Index()
         {
-            LoggerConfig.Logger.Debug("Hello SmartShop");
+            //LoggerConfig.Logger.Debug("Hello SmartShop");
             return View();
         }
 
