@@ -18,7 +18,7 @@ namespace SmartShop.Web.Areas.Admin.Models
         {
 
             // All Post Data
-            string[] columnOrder = { null, "Name", null, null, "CreatedAt", null };
+            string[] columnOrder = { null, "Name", null, null,null, null };
             int index = model.GetPageIndex();
             int length = model.GetPageSize();
             string searchValue = model.GetSearchText();
