@@ -22,7 +22,9 @@ namespace SmartShop.Foundation
             recordsFiltered = 0;
 
             return _customerManagementUnit.CustomerRepository.GetDynamic(out recordsTotal, out recordsFiltered,
-                x => x.Email.Contains(searchValue) && x.Roles.Any(y => y.Name== "Customer"), sortColumnName + " " + sortDirection, "", index, length).ToList();
+                x => (x.Email.Contains(searchValue) || x.UserName.Contains(searchValue)) 
+                && x.Roles.Any(y => y.Name== "Customer"), sortColumnName + " " + sortDirection, "",
+                index, length).ToList();
         }
     }
 }
