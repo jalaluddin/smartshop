@@ -1,5 +1,6 @@
 ﻿using SmartShop.Data;
 using SmartShop.Web.App_Start;
+using SmartShop.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace SmartShop.Web.Controllers
     {
         public ActionResult Index()
         {
-            //LoggerConfig.Logger.Debug("Hello SmartShop");
+            ViewBag.MainProductCategoryList = new ProductCategoryModel().GetMainProductCategoryList();
             return View();
         }
 

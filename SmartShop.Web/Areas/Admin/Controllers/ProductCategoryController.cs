@@ -4,9 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SmartShop.Inventory;
-using SmartShop.Web.Areas.Admin.Models;
-using SmartShop.Web.Models;
 using System.Linq.Dynamic;
+using SmartShop.Web.Models;
 
 namespace SmartShop.Web.Areas.Admin.Controllers
 {
@@ -21,13 +20,13 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         }
         public ActionResult Add()
         {
-            var productCategoryModel = new ProductCategoryModel();            
+            var productCategoryModel = new Models.ProductCategoryModel();            
             
             return View(productCategoryModel);
         }
 
         [HttpPost]
-        public ActionResult Add(ProductCategoryModel productCategoryModel)
+        public ActionResult Add(Models.ProductCategoryModel productCategoryModel)
         {
             productCategoryModel.AddCategory(productCategoryModel.Name, productCategoryModel.IsActive, productCategoryModel.ParentCategoryId);
             return View(productCategoryModel);
@@ -40,7 +39,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
 
         public JsonResult GetJsonData(DataTablesAjaxRequestModel model)
         {
-            var jsonData = new ProductCategoryListModel().GetProductCategoryJson(model);
+            var jsonData = new Models.ProductCategoryListModel().GetProductCategoryJson(model);
 
             return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
@@ -50,7 +49,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         {
             try
             {
-                var model = new ProductCategoryModel();
+                var model = new Models.ProductCategoryModel();
                 model.DeleteProductCategory(id);
                 ViewBag.Message = "Successfuly deleted item.";
                 ViewBag.Success = true;
@@ -66,15 +65,15 @@ namespace SmartShop.Web.Areas.Admin.Controllers
 
         public ActionResult Edit(Guid? id)
         {
-            var model = new ProductCategoryModel(id.Value);
+            var model = new Models.ProductCategoryModel(id.Value);
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit(ProductCategoryModel productCategoryModel)
+        public ActionResult Edit(Models.ProductCategoryModel productCategoryModel)
         {
-            new ProductCategoryModel().UpdateCategory(productCategoryModel.ID, productCategoryModel.Name, productCategoryModel.IsActive, productCategoryModel.ParentCategoryId);
+            new Models.ProductCategoryModel().UpdateCategory(productCategoryModel.ID, productCategoryModel.Name, productCategoryModel.IsActive, productCategoryModel.ParentCategoryId);
 
-            var model = new ProductCategoryModel(productCategoryModel.ID);
+            var model = new Models.ProductCategoryModel(productCategoryModel.ID);
             return View(model);
         }
     }
