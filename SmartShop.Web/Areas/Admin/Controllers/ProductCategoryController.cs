@@ -29,7 +29,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         public ActionResult Add(Models.ProductCategoryModel productCategoryModel)
         {
             productCategoryModel.AddCategory(productCategoryModel.Name, productCategoryModel.IsActive, productCategoryModel.ParentCategoryId);
-            return View(productCategoryModel);
+            return RedirectToAction("List");
         }
 
         public ActionResult List()
@@ -73,8 +73,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         {
             new Models.ProductCategoryModel().UpdateCategory(productCategoryModel.ID, productCategoryModel.Name, productCategoryModel.IsActive, productCategoryModel.ParentCategoryId);
 
-            var model = new Models.ProductCategoryModel(productCategoryModel.ID);
-            return View(model);
+            return RedirectToAction("List");
         }
     }
 }

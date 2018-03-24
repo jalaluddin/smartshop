@@ -83,9 +83,11 @@ namespace SmartShop.Inventory
             return data;
         }
 
-        public IEnumerable<ProductCategory> GetChildProductCatrgory()
+        public IEnumerable<ProductCategory> GetChildProductCatrgory(Guid parentId)
         {
-            throw new Exception();
+            var data = _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get(
+                x => x.ParentCatgory.ID == parentId);
+            return data;
         }
     }
 }

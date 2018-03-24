@@ -12,5 +12,18 @@ namespace SmartShop.Web.Models
         {
             return new ProductCategoryManagementService().GetMainProductCatrgoryList();
         }
+
+        public IEnumerable<ProductCategory> GetChildProductCategoryList(Guid? parentId)
+        {
+            if (parentId==null)
+            {
+                return null;
+            }
+            else
+            {
+                return new ProductCategoryManagementService().GetChildProductCatrgory(parentId.Value);
+            }
+            
+        }
     }
 }

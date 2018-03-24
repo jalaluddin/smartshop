@@ -11,9 +11,14 @@ namespace SmartShop.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public HomeController()
         {
             ViewBag.MainProductCategoryList = new ProductCategoryModel().GetMainProductCategoryList();
+        }
+
+        public ActionResult Index()
+        {
+            
             return View();
         }
 
