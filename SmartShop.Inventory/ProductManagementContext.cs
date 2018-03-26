@@ -14,16 +14,20 @@ namespace SmartShop.Inventory
         public ProductManagementContext()
             :base("DefaultConnection")
         {
-            Database.SetInitializer<ProductManagementContext>(null);
+            //Database.SetInitializer<ProductManagementContext>(null);
         }
 
         public DbSet<ProductCategory> ProductCategory { get; set; }
 
         public DbSet<Product> Product { get; set; }
+        public DbSet<ProductImage> ProductImage { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder
+                .Entity<Product>()
+                .HasMany<ProductImage>(x => x.ProductImages).WithOptional().HasForeignKey(y => y.Product_ID).WillCascadeOnDelete();
         }
     }
 }

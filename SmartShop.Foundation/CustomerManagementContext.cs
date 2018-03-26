@@ -13,7 +13,7 @@ namespace SmartShop.Foundation
         public CustomerManagementContext()
             : base("DefaultConnection")
         {
-            Database.SetInitializer<CustomerManagementContext>(null);
+            //Database.SetInitializer<CustomerManagementContext>(null);
         }
 
         public DbSet<Customer> Customer { get; set; }
