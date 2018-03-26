@@ -75,5 +75,19 @@ namespace SmartShop.Inventory
            
             _productCategoryManagementUnitOfWork.Save();
         }
+
+        public IEnumerable<ProductCategory> GetMainProductCatrgoryList()
+        {
+            var data = _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get(
+                x => x.ParentCatgory == null);
+            return data;
+        }
+
+        public IEnumerable<ProductCategory> GetChildProductCatrgory(Guid parentId)
+        {
+            var data = _productCategoryManagementUnitOfWork.ProductCategoryRepository.Get(
+                x => x.ParentCatgory.ID == parentId);
+            return data;
+        }
     }
 }

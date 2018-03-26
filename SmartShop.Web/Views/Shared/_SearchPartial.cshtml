@@ -5,11 +5,14 @@
     <div class="section_room">
         <select id="country" onchange="change_country(this.value)" class="frm-field required">
             <option value="null">All categories</option>
-            <option value="null">Electronics</option>
-            <option value="AX">kids Wear</option>
-            <option value="AX">Men's Wear</option>
-            <option value="AX">Women's Wear</option>
-            <option value="AX">Watches</option>
+            @if (ViewBag.MainProductCategoryList != null)
+            {
+                foreach (var ProductCategory in ViewBag.MainProductCategoryList)
+                {
+                    <option value="@ProductCategory.ID">@ProductCategory.Name</option>
+                }
+            }
+           
         </select>
     </div>
     <div class="sear-sub">
