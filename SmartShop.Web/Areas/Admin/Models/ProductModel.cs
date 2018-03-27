@@ -20,7 +20,8 @@ namespace SmartShop.Web.Areas.Admin.Models
         public int Quantity { get; set; }
         public string Description { get; set; }
         public bool IsNew { get; set; }
-        public HttpPostedFileBase FeaturedImageFile { get; set; }
+        public HttpPostedFileBase[] ProductImages { get; set; }
+        public int ImageSelection { get; set; }
 
         public ProductModel()
         {
@@ -31,26 +32,31 @@ namespace SmartShop.Web.Areas.Admin.Models
 
         public void AddProduct(string name, double price, Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew)
         {
-            var imageUrl = UploadFeaturedImage(FeaturedImageFile);
-            _productManagementService.AddProduct(name, price, productCategoryId, specialPrice, quantity, description, isNew);
+            var images = UploadImages(ProductImages);
+            _productManagementService.AddProduct(name, images, images[ImageSelection-1], price, productCategoryId, specialPrice, quantity, description, isNew);
         }
 
-        private ProductImage UploadFeaturedImage(HttpPostedFileBase featuredImageFile)
+        private List<ProductImage> UploadImages(HttpPostedFileBase[] imageFiles)
         {
-            if(featuredImageFile != null)
+            List<ProductImage> productImage = new List<ProductImage>();
+            if(imageFiles != null)
             {
                 string uploadPath = ConfigurationManager.AppSettings["TemporaryFileLocation"];
-                string originalName = featuredImageFile.FileName;
-                string newName = Guid.NewGuid().ToString().Replace("-", "") + originalName.Substring(originalName.IndexOf('.'));
-                string fullPath = uploadPath + "/" + newName;
-                featuredImageFile.SaveAs(HttpContext.Current.Server.MapPath(fullPath));
+                for (int i = 0; i < imageFiles.Length; i++)
+                {
+                    string originalName = imageFiles[i].FileName;
+                    string newName = Guid.NewGuid().ToString().Replace("-", "") + originalName.Substring(originalName.IndexOf('.'));
+                    string fullPath = uploadPath + "/" + newName;
+                    imageFiles[i].SaveAs(HttpContext.Current.Server.MapPath(fullPath));
 
-                ProductImage image = new ProductImage();
-                image.ImageUrl = fullPath;
-                image.OriginalName = originalName;
-                image.CurrentName = newName;
+                    ProductImage image = new ProductImage();
+                    image.ImageUrl = fullPath;
+                    image.OriginalName = originalName;
+                    image.CurrentName = newName;
 
-                return image;
+                    productImage.Add(image);
+                }
+                return productImage;
             }
             return null;
         }

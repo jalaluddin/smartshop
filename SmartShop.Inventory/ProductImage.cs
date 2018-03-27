@@ -1,4 +1,5 @@
 ﻿using SmartShop.Data;
+using System;
 
 namespace SmartShop.Inventory
 {
@@ -8,5 +9,6 @@ namespace SmartShop.Inventory
         public string ImageUrl { get; set; }    
         public string OriginalName { get; set; }
         public string CurrentName { get; set; }
+        public Guid Product_ID { get; set; }
     }
 }

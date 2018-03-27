@@ -10,10 +10,12 @@ namespace SmartShop.Inventory
     public class ProductManagementUnitOfWork : UnitOfWork
     {
         public ProductRepository ProductRepository { get; set; }
+        public ProductImageRepository ProductImageRepository { get; set; }
 
         public ProductManagementUnitOfWork(ProductManagementContext context) :base(context)
         {
             ProductRepository = new ProductRepository(context);
+            ProductImageRepository = new ProductImageRepository(context);
         }
 
         
