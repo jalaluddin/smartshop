@@ -41,7 +41,7 @@ namespace SmartShop.Web.Areas.Admin.Models
                         record.Price.ToString(),
                         record.SpecialPrice.ToString(),
                         record.Quantity.ToString(),
-                        (record.FeaturedImage != null ? record.FeaturedImage.ToString() : "-" ),
+                        (record.FeaturedImage != null ? record.FeaturedImage.ImageUrl.ToString().Replace("~","") : "" ),
                         record.IsNew.ToString(),
                         record.ID.ToString()
                     }

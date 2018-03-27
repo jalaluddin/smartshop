@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label>Images</label>
-                        <input type="file" name="FeaturedImageFile" />
+                        <input type="file" name="ProductImages" multiple />
                     </div>
                     <!-- checkbox -->
                     <div class="form-group">
@@ -74,3 +74,16 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+@section scripts
+{
+    <script type="text/javascript">
+    //function addOneMoreInput() {
+    //    $('input[type=file]').last().change(function () {
+    //        $(this).after('<input type="file" name="files[]" />');
+    //        $(this).off('change');
+    //        addOneMoreInput();
+    //    });
+    //}
+    //addOneMoreInput();
+    </script>   
+}

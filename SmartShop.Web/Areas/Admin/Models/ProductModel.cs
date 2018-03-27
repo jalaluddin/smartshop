@@ -20,30 +20,37 @@ namespace SmartShop.Web.Areas.Admin.Models
         public int Quantity { get; set; }
         public string Description { get; set; }
         public bool IsNew { get; set; }
-        public HttpPostedFileBase FeaturedImageFile { get; set; }
+        public List<HttpPostedFileBase> ProductImages { get; set; }
 
         public ProductModel()
         {
             _productManagementService = new ProductManagementService();
             _productCategoryManagementService = new ProductCategoryManagementService();
             ProductCategories = _productCategoryManagementService.GetAllCategories();
+            ProductImages = new List<HttpPostedFileBase>();
         }
 
-        public void AddProduct(string name, double price, Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew)
+        public void AddProduct(string name, double price, Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew, List<HttpPostedFileBase> productImages)
         {
-            var imageUrl = UploadFeaturedImage(FeaturedImageFile);
-            _productManagementService.AddProduct(name, price, productCategoryId, specialPrice, quantity, description, isNew);
+            var productImageList = new List<ProductImage>();
+
+            foreach(var image in productImages)
+            {
+                productImageList.Add(UploadFeaturedImage(image)); 
+            }
+            //featuredImage = UploadFeaturedImage(featuredImageFile);
+            _productManagementService.AddProduct(name, price, productCategoryId, specialPrice, quantity, description, isNew, productImageList);
         }
 
-        private ProductImage UploadFeaturedImage(HttpPostedFileBase featuredImageFile)
+        private ProductImage UploadFeaturedImage(HttpPostedFileBase imageFile)
         {
-            if(featuredImageFile != null)
+            if(imageFile != null)
             {
                 string uploadPath = ConfigurationManager.AppSettings["TemporaryFileLocation"];
-                string originalName = featuredImageFile.FileName;
+                string originalName = imageFile.FileName;
                 string newName = Guid.NewGuid().ToString().Replace("-", "") + originalName.Substring(originalName.IndexOf('.'));
                 string fullPath = uploadPath + "/" + newName;
-                featuredImageFile.SaveAs(HttpContext.Current.Server.MapPath(fullPath));
+                imageFile.SaveAs(HttpContext.Current.Server.MapPath(fullPath));
 
                 ProductImage image = new ProductImage();
                 image.ImageUrl = fullPath;

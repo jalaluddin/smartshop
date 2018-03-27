@@ -28,7 +28,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Add(ProductModel productModel )
         {
-            productModel.AddProduct(productModel.Name, productModel.Price, productModel.ProductCategoryId, productModel.SpecialPrice, productModel.Quantity, productModel.Description, productModel.IsNew);
+            productModel.AddProduct(productModel.Name, productModel.Price, productModel.ProductCategoryId, productModel.SpecialPrice, productModel.Quantity, productModel.Description, productModel.IsNew, productModel.ProductImages);
             return View(productModel);
         }
 

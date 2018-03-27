@@ -21,7 +21,5 @@ namespace SmartShop.Inventory
         public virtual List<ProductReviews> ProductReviews { get; set; }
         public virtual ProductAdditionalInformation ProductAdditionalInformation { get; set; }
         public bool IsNew { get; set; }
-
-
     }
 }
