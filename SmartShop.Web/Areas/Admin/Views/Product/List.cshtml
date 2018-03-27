@@ -29,12 +29,12 @@
                     <div class="box-body">
 
                         @if (TempData["Message"] != null)
-                        {
-                            <div class="alert alert-@TempData["alertType"]">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                @TempData["Message"]
-                            </div>
-                        }
+    {
+                    <div class="alert alert-@TempData["alertType"]">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        @TempData["Message"]
+                    </div>
+}
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -89,6 +89,8 @@
     </div>
 </div>
 
+
+
 <!-- DataTables -->
 <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
 @section scripts{
@@ -105,13 +107,23 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],	//to add all button
                 pageLength: 10,	//to make default
 
-                columnDefs: [{
+                columnDefs: [
+                    {
                         render: function (data, type, row) {
                             return "<button onclick=\"showModal('" + data + "')\" >Delete</button>";
                         },
                         targets: 8
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return "<img src='"+data+"' style='width:50px' />";
+                        },
+                        targets: 6
                     }
+
                 ]
+                
+                
             });
         });
 

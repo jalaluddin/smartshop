@@ -28,7 +28,9 @@ namespace SmartShop.Inventory
                 x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", index, length).ToList();
         }
 
-        public void AddProduct(string name,List<ProductImage> productImages, double price, Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew  )
+        public void AddProduct(string name,List<ProductImage> productImages, double price, 
+            Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew,
+            List<ProductType> productTypes, List<ProductAdditionalInformation> productAdditionalInformations)
         {
             Product product = new Product();
 
@@ -39,12 +41,9 @@ namespace SmartShop.Inventory
             product.Quantity = quantity;
             product.Description = description;
             product.IsNew = isNew;
-
-            foreach (var image in productImages)
-            {
-                image.Product_ID = product.ID;
-            }
             product.ProductImages = productImages;
+            product.ProductTypes = productTypes;
+            product.ProductAdditionalInformations = productAdditionalInformations;
 
             _productManagementUnitOfWork.ProductRepository.Insert(product);
             _productManagementUnitOfWork.Save();
