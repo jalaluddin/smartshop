@@ -33,7 +33,8 @@ namespace SmartShop.Web.Areas.Admin.Models
         public void AddProduct(string name, double price, Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew)
         {
             var images = UploadImages(ProductImages);
-            _productManagementService.AddProduct(name, images, images[ImageSelection-1], price, productCategoryId, specialPrice, quantity, description, isNew);
+            images[ImageSelection - 1].IsFeaturedImage = true;
+            _productManagementService.AddProduct(name, images, price, productCategoryId, specialPrice, quantity, description, isNew);
         }
 
         private List<ProductImage> UploadImages(HttpPostedFileBase[] imageFiles)
