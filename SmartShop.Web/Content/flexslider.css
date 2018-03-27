@@ -135,7 +135,7 @@ max-height: 450px;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  background: url(../images/left.png) 0px 0px ;
+  background: url(/Content/images/left.png) 0px 0px ;
   text-indent: -9999px ;
 }
 
@@ -145,7 +145,7 @@ max-height: 450px;
 .flex-direction-nav .flex-next {
   right: -50px;
 
-   background: url(../images/right.png) 0px 0px ;
+   background: url(/Content/images/right.png) 0px 0px ;
   
 }
 .flexslider:hover .flex-direction-nav .flex-prev {

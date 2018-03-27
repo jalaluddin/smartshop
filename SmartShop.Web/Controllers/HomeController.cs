@@ -40,5 +40,10 @@ namespace SmartShop.Web.Controllers
 
             return View();
         }
+
+        public ActionResult Details()
+        {
+            return View();
+        }
     }
 }
