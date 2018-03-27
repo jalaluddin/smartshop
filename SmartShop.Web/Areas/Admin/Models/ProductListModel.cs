@@ -41,7 +41,11 @@ namespace SmartShop.Web.Areas.Admin.Models
                         record.Price.ToString(),
                         record.SpecialPrice.ToString(),
                         record.Quantity.ToString(),
-                        (record.ProductImages != null ? record.ProductImages.Where(x => x.IsFeaturedImage).First().ImageUrl.ToString() : "-" ),
+                        ( (record.ProductImages != null)&&(record.ProductImages.Count != 0)
+                            ?( record.ProductImages.Where(x => x.IsFeaturedImage).Count() != 0 
+                            ? record.ProductImages.Where(x => x.IsFeaturedImage).First().ImageUrl.ToString().TrimStart('~')
+                            :"/Content/img/noImage.png")
+                            : "/Content/img/noImage.png" ),
                         record.IsNew.ToString(),
                         record.ID.ToString()
                     }

@@ -22,6 +22,9 @@ namespace SmartShop.Web.Areas.Admin.Models
         public bool IsNew { get; set; }
         public HttpPostedFileBase[] ProductImages { get; set; }
         public int ImageSelection { get; set; }
+        public string[] ProductTypes { get; set; }
+        public string[] ProductAdditionalInformationName { get; set; }
+        public string[] ProductAdditionalInformationDescription { get; set; }
 
         public ProductModel()
         {
@@ -30,11 +33,39 @@ namespace SmartShop.Web.Areas.Admin.Models
             ProductCategories = _productCategoryManagementService.GetAllCategories();
         }
 
-        public void AddProduct(string name, double price, Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew)
+        public void AddProduct()
         {
+            List<ProductType> productTypeList = new List<ProductType>();
+            List<ProductAdditionalInformation> productAdditionalInformationList = new List<ProductAdditionalInformation>();
+
             var images = UploadImages(ProductImages);
-            images[ImageSelection - 1].IsFeaturedImage = true;
-            _productManagementService.AddProduct(name, images, price, productCategoryId, specialPrice, quantity, description, isNew);
+            if (ImageSelection !=0)
+            {
+                images[ImageSelection - 1].IsFeaturedImage = true;
+            }
+            for (int i  = 0; i  < ProductTypes.Length; i ++)
+            {
+                if (ProductTypes[i] != "")
+                {
+                    ProductType productType = new ProductType();
+                    productType.Name = ProductTypes[i];
+                    productTypeList.Add(productType);
+                }
+
+            }
+            for (int i = 0; i < ProductAdditionalInformationDescription.Length; i++)
+            {
+                if (ProductAdditionalInformationName[i] != "" && ProductAdditionalInformationDescription[i] != "")
+                {
+                    ProductAdditionalInformation productAdditionalInformation = new ProductAdditionalInformation();
+                    productAdditionalInformation.Name = ProductAdditionalInformationName[i];
+                    productAdditionalInformation.Description = ProductAdditionalInformationDescription[i];
+
+                    productAdditionalInformationList.Add(productAdditionalInformation);
+                }
+            }
+            
+            _productManagementService.AddProduct(Name, images, Price, ProductCategoryId, SpecialPrice, Quantity, Description, IsNew , productTypeList, productAdditionalInformationList);
         }
 
         private List<ProductImage> UploadImages(HttpPostedFileBase[] imageFiles)
@@ -45,17 +76,20 @@ namespace SmartShop.Web.Areas.Admin.Models
                 string uploadPath = ConfigurationManager.AppSettings["TemporaryFileLocation"];
                 for (int i = 0; i < imageFiles.Length; i++)
                 {
-                    string originalName = imageFiles[i].FileName;
-                    string newName = Guid.NewGuid().ToString().Replace("-", "") + originalName.Substring(originalName.IndexOf('.'));
-                    string fullPath = uploadPath + "/" + newName;
-                    imageFiles[i].SaveAs(HttpContext.Current.Server.MapPath(fullPath));
+                    if (imageFiles[i] !=null)
+                    {
+                        string originalName = imageFiles[i].FileName;
+                        string newName = Guid.NewGuid().ToString().Replace("-", "") + originalName.Substring(originalName.IndexOf('.'));
+                        string fullPath = uploadPath + "/" + newName;
+                        imageFiles[i].SaveAs(HttpContext.Current.Server.MapPath(fullPath));
 
-                    ProductImage image = new ProductImage();
-                    image.ImageUrl = fullPath;
-                    image.OriginalName = originalName;
-                    image.CurrentName = newName;
+                        ProductImage image = new ProductImage();
+                        image.ImageUrl = fullPath;
+                        image.OriginalName = originalName;
+                        image.CurrentName = newName;
 
-                    productImage.Add(image);
+                        productImage.Add(image);
+                    }
                 }
                 return productImage;
             }

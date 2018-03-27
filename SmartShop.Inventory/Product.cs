@@ -14,13 +14,11 @@ namespace SmartShop.Inventory
         public virtual ProductCategory ProductCategory { get; set; }
         public double SpecialPrice { get; set; }
         public int Quantity { get; set; }
-        //public virtual ProductType Type { get; set; }
+        public virtual List<ProductType> ProductTypes { get; set; }
         public virtual List<ProductImage> ProductImages { get; set; }
         public string Description { get; set; }
-        //public virtual List<ProductReviews> ProductReviews { get; set; }
-        //public virtual ProductAdditionalInformation ProductAdditionalInformation { get; set; }
+        public virtual List<ProductReviews> ProductReviews { get; set; }
+        public virtual List<ProductAdditionalInformation> ProductAdditionalInformations { get; set; }
         public bool IsNew { get; set; }
-
-
     }
 }
