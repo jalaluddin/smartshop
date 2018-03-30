@@ -58,6 +58,7 @@
     <Compile Include="ProductCategoryManagementService.cs" />
     <Compile Include="ProductCategoryManagementUnitOfWork.cs" />
     <Compile Include="ProductCategoryRepository.cs" />
+    <Compile Include="ProductCategoryUnitOfWork.cs" />
     <Compile Include="ProductImage.cs" />
     <Compile Include="ProductImageRepository.cs" />
     <Compile Include="ProductManagementContext.cs" />

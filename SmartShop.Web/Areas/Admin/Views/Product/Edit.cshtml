@@ -1,0 +1,158 @@
+﻿@model SmartShop.Web.Areas.Admin.Models.ProductModel
+@{
+    ViewBag.Title = "Edit";
+
+}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/select2.min.css" rel="stylesheet" />
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Edit Product
+            <small></small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Product</a></li>
+            <li class="active">Edit Product</li>
+        </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="box">
+            <div class="box-body">
+                <form action="/Admin/Product/Edit" role="form" method="post" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input name="Name" value="@Model.Name" class="form-control" placeholder="Product Name" type="text">
+                    </div>
+                    <!-- select -->
+                    <div class="form-group">
+                        <label>Category</label>
+                        @Html.DropDownListFor(m => m.ProductCategoryId, new SelectList(Model.ProductCategories, "Id", "Name"), "", new { @class = "form-control" })
+                    </div>
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input name="Price" value="@Model.Price" class="form-control" placeholder="Price" type="text">
+                    </div>
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Special Price</label>
+                        <input name="SpecialPrice" value="@Model.SpecialPrice" class="form-control" placeholder="Special Price" type="text">
+                    </div>
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input name="Quantity" value="@Model.Quantity" class="form-control" placeholder="Quantity" type="text">
+                    </div>
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="Description" value="@Model.Description" class="form-control" placeholder="Product Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="select2" multiple="multiple" name="ProductTypes" style="width:100%">
+                            @foreach(var productType in Model.ExistingProductTypes)
+                            {
+                                <option>@productType.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group" id="additionalInfo">
+                        <label>Additional Information</label>
+                        <a onclick="addAdditionalInfoInput();"><i class="fa fa-plus"></i></a><br />
+                        @foreach (var additionalInformation in Model.ExistingAdditionalInformations)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="ProductAdditionalInformationName" value="@additionalInformation.Name" class="form-control" placeholder="Title" />
+                                </div>
+                                <div class="col-md-6">
+                                    <textarea name="ProductAdditionalInformationDescription" class="form-control" placeholder="Product Description">@additionalInformation.Description</textarea>
+                                </div>
+                            </div>
+                        }
+                        <br />
+                    </div>
+                    <div id="productImages">
+                        <label>File Upload</label>
+                        <a onclick="addFileUploadInput();" id="imageAddButton"><i class="fa fa-plus"></i></a><br />
+                        <input type="radio" name="ImageSelection" value="1" style="float:left;margin-right:10px" /> <input type="file" name="ProductImages" /><br />
+                    </div>
+
+                    <!-- checkbox -->
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(m => m.IsNew)
+                                New?
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section scripts{
+    <script src="~/Scripts/select2.full.min.js"></script>
+    <script>
+        $('.select2').select2({
+            tags: true,
+            maximumSelectionLength: 3,
+            placeholder: 'Add Maximum 3 Types'
+        });
+        var imgClicks = 1;
+        var radioValue = 0;
+        function addFileUploadInput() {
+
+            radioValue++;
+            var html = '<div class="imageAppendDiv"><input type="radio" name="ImageSelection" value="' + radioValue +
+                 '" style="float: left; margin-right:10px" />' +
+                 '<input type="file" name="ProductImages" style="display: inline"/>' +
+                 '<a onclick="javascript:void(0);"><i class="fa fa-remove" style="color:red"></i></a><br /><br /></div>';
+
+            if (imgClicks > 3) {
+                $("#imageAddButton").hide();
+                alert("Maximum 4 Images Can be Added");
+            } else {
+                imgClicks++;
+                $("#imageAddButton").show();
+                 $("#productImages").append(html);
+             }
+
+
+        }
+        $('#productImages').on('click', '.imageAppendDiv a', function () {
+            imgClicks--;
+            $("#imageAddButton").show();
+            $(this).closest('.imageAppendDiv').remove();
+        });
+
+        function addAdditionalInfoInput() {
+            var html = '<div class="row infoAppendDiv">' +
+                '<div class="col-md-6" >' +
+                '<input type="text" name="ProductAdditionalInformationName" class="form-control" placeholder="Title" />' +
+                '</div >' +
+                '<div class="col-md-6">' +
+                '<textarea name="ProductAdditionalInformationDescription" class="form-control" placeholder="Product Description"></textarea>' +
+
+                '<a onclick="javascript:void(0);"><i class="fa fa-remove" style="color:red"></i></a><br /><br /> </div>';
+
+            $("#additionalInfo").append(html);
+        }
+        $('#additionalInfo').on('click', '.infoAppendDiv a', function () {
+            $(this).closest('.infoAppendDiv').remove();
+        });
+
+    </script>
+}

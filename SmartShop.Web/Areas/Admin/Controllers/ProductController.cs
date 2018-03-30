@@ -57,6 +57,19 @@ namespace SmartShop.Web.Areas.Admin.Controllers
 
         }
 
+        public ActionResult Edit(Guid? id)
+        {
+            var model = new Models.ProductModel(id.Value);
+            return View(model);
+        }
+
+        public ActionResult Edit(Models.ProductModel productModel)
+        {
+            productModel.UpdateProduct();
+
+            return RedirectToAction("List");
+        }
+
         public ActionResult Delete(Guid? id)
         {
             try

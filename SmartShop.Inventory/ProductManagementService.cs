@@ -28,7 +28,8 @@ namespace SmartShop.Inventory
             return _productManagementUnitOfWork.ProductRepository.GetDynamic(out recordsTotal, out recordsFiltered,
                 x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", index, length).ToList();
         }
-        public Product GetProductDetais(Guid id)
+                
+        public Product GetProductDetails(Guid id)
         {
             return _productManagementUnitOfWork.ProductRepository.GetByID(id);
         }
@@ -51,6 +52,26 @@ namespace SmartShop.Inventory
             product.ProductAdditionalInformations = productAdditionalInformations;
 
             _productManagementUnitOfWork.ProductRepository.Insert(product);
+            _productManagementUnitOfWork.Save();
+        }
+
+        public void UpdateProduct(Guid id, string name, List<ProductImage> productImages, double price,
+            Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew,
+            List<ProductType> productTypes, List<ProductAdditionalInformation> productAdditionalInformations)
+        {
+            Product product = _productManagementUnitOfWork.ProductRepository.GetByID(id);
+
+            product.Name = name;
+            product.Price = price;
+            product.ProductCategory = _productCategoryManagementUnitOfWork.ProductCategoryRepository.GetByID(productCategoryId);
+            product.SpecialPrice = specialPrice;
+            product.Quantity = quantity;
+            product.Description = description;
+            product.IsNew = isNew;
+            product.ProductImages = productImages;
+            product.ProductTypes = productTypes;
+            product.ProductAdditionalInformations = productAdditionalInformations;
+                        
             _productManagementUnitOfWork.Save();
         }
 

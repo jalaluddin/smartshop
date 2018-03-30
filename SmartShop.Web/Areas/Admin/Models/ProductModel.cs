@@ -12,6 +12,7 @@ namespace SmartShop.Web.Areas.Admin.Models
         private ProductManagementService _productManagementService;
         private ProductCategoryManagementService _productCategoryManagementService;
 
+        public Guid ID { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public virtual List<ProductCategory> ProductCategories { get; set; }
@@ -26,11 +27,49 @@ namespace SmartShop.Web.Areas.Admin.Models
         public string[] ProductAdditionalInformationName { get; set; }
         public string[] ProductAdditionalInformationDescription { get; set; }
 
+        //Properties for product edit
+
+        public List<ProductImage> ExistingProductImages { get; set; }
+        public List<ProductType> ExistingProductTypes { get; set; }
+        public List<ProductAdditionalInformation> ExistingAdditionalInformations { get; set; }
+
+
         public ProductModel()
         {
             _productManagementService = new ProductManagementService();
             _productCategoryManagementService = new ProductCategoryManagementService();
             ProductCategories = _productCategoryManagementService.GetAllCategories();
+        }
+
+        public ProductModel(Guid id) : this()
+        {
+            var product = _productManagementService.GetProductDetails(id);
+
+            this.ID = product.ID;
+            this.Name = product.Name;
+            this.Price = product.Price;
+            if (product.ProductCategory != null)
+            {
+                this.ProductCategoryId = product.ProductCategory.ID;
+            }
+            this.SpecialPrice = product.SpecialPrice;
+            this.Quantity = product.Quantity;
+            this.Description = product.Description;
+            this.IsNew = product.IsNew;
+            if (product.ProductImages != null)
+            {
+                this.ExistingProductImages = product.ProductImages;
+            }
+            if (product.ProductTypes != null)
+            {
+                this.ExistingProductTypes = product.ProductTypes;
+            }
+            if (product.ProductAdditionalInformations != null)
+            {
+                this.ExistingAdditionalInformations = product.ProductAdditionalInformations;
+            }
+
+
         }
 
         public void AddProduct()
@@ -94,6 +133,32 @@ namespace SmartShop.Web.Areas.Admin.Models
                 return productImage;
             }
             return null;
+        }
+
+        public void UpdateProduct()
+        {
+            for (int i = 0; i < productTypes.Length; i++)
+            {
+                if (productTypes[i] != "")
+                {
+                    ProductType productType = _productManagementService;
+                    productType.Name = ProductTypes[i];
+                    productTypeList.Add(productType);
+                }
+
+            }
+            for (int i = 0; i < ProductAdditionalInformationDescription.Length; i++)
+            {
+                if (ProductAdditionalInformationName[i] != "" && ProductAdditionalInformationDescription[i] != "")
+                {
+                    ProductAdditionalInformation productAdditionalInformation = new ProductAdditionalInformation();
+                    productAdditionalInformation.Name = ProductAdditionalInformationName[i];
+                    productAdditionalInformation.Description = ProductAdditionalInformationDescription[i];
+
+                    productAdditionalInformationList.Add(productAdditionalInformation);
+                }
+            }
+            _productManagementService.UpdateProduct(id, name, productImages, price, productCategoryId, specialPrice, quantity, description, isNew, productTypes, productAdditionalInformations);
         }
 
         public void DeleteProduct(Guid? id)
