@@ -1,6 +1,5 @@
 ﻿using SmartShop.Inventory;
 using SmartShop.Web.Areas.Admin.Models;
-using SmartShop.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +27,21 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Add(ProductModel productModel )
         {
-            productModel.AddProduct();
-            return View(productModel);
+             try
+             {
+                productModel.AddProduct();
+                TempData["message"] = "Successfully Product Added";
+                TempData["alertType"] = "success";
+
+            }
+            catch(Exception e)
+            {
+                App_Start.LoggerConfig.Logger.Debug(e.Message);
+                TempData["message"] = "Failed to Add Product";
+                TempData["alertType"] = "danger";
+            }
+
+            return RedirectToAction("List");
         }
 
         public ActionResult List()
@@ -37,7 +49,7 @@ namespace SmartShop.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public JsonResult GetJsonData(DataTablesAjaxRequestModel model)
+        public JsonResult GetJsonData(Web.Models.DataTablesAjaxRequestModel model)
         {
             var jsonData = new ProductListModel().GetProductJsonData(model);
 
@@ -49,14 +61,14 @@ namespace SmartShop.Web.Areas.Admin.Controllers
         {
             try
             {
-                
                 new ProductModel().DeleteProduct(id);
                 TempData["message"] = "Successfully Deleted";
                 TempData["alertType"] = "success";
 
             }
-            catch
+            catch(Exception e)
             {
+                App_Start.LoggerConfig.Logger.Debug(e.InnerException.InnerException.Message);
                 TempData["message"] = "Failed to Deleted";
                 TempData["alertType"] = "danger";
             }
