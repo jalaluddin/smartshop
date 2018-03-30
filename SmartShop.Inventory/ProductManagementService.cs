@@ -59,5 +59,15 @@ namespace SmartShop.Inventory
             _productManagementUnitOfWork.ProductRepository.Delete(id);
             _productManagementUnitOfWork.Save();
         }
+
+        public IEnumerable<Product> GetLatestDesignProductList()
+        {
+            return _productManagementUnitOfWork.ProductRepository.Get(w => w.IsNew);
+        }
+
+        public IEnumerable<Product> GetSpacialOffersProductList()
+        {
+            return _productManagementUnitOfWork.ProductRepository.Get(w => w.SpecialPrice > 0 );
+        }
     }
 }

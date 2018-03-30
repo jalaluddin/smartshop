@@ -18,8 +18,11 @@ namespace SmartShop.Web.Controllers
 
         public ActionResult Index()
         {
-            
-            return View();
+            HomeModel homeModel = new HomeModel();
+
+            homeModel.LatestProduct = new ProductModel().GetLatestDesignProductList().ToList();
+            homeModel.SpecialOfferProduct = new ProductModel().GetSpacialOffersProductList().ToList();
+            return View(homeModel);
         }
 
         public ActionResult About()

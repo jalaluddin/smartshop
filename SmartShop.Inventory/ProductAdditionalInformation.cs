@@ -7,5 +7,6 @@ namespace SmartShop.Inventory
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public Guid Product_ID { get; set; }
     }
 }

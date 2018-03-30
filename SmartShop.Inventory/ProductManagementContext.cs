@@ -25,10 +25,17 @@ namespace SmartShop.Inventory
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            /*modelBuilder
+            modelBuilder
                 .Entity<Product>()
-                .HasMany<ProductImage>(x => x.ProductImages).WithOptional().HasForeignKey(y => y.Product_ID).WillCascadeOnDelete();*/
-           
+                .HasMany<ProductImage>(x => x.ProductImages).WithOptional().HasForeignKey(y => y.Product_ID).WillCascadeOnDelete();
+
+            modelBuilder
+                .Entity<Product>()
+                .HasMany<ProductType>(x => x.ProductTypes).WithOptional().HasForeignKey(y => y.Product_ID).WillCascadeOnDelete();
+
+            modelBuilder
+                .Entity<Product>()
+                .HasMany<ProductAdditionalInformation>(x => x.ProductAdditionalInformations).WithOptional().HasForeignKey(y => y.Product_ID).WillCascadeOnDelete();
         }
     }
 }
