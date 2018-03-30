@@ -10,6 +10,7 @@ namespace SmartShop.Inventory
     {
         private ProductManagementContext _context;
         private ProductManagementUnitOfWork _productManagementUnitOfWork;
+
         private ProductCategoryManagementUnitOfWork _productCategoryManagementUnitOfWork;
 
         public ProductManagementService()
@@ -26,6 +27,10 @@ namespace SmartShop.Inventory
 
             return _productManagementUnitOfWork.ProductRepository.GetDynamic(out recordsTotal, out recordsFiltered,
                 x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", index, length).ToList();
+        }
+        public Product GetProductDetais(Guid id)
+        {
+            return _productManagementUnitOfWork.ProductRepository.GetByID(id);
         }
 
         public void AddProduct(string name,List<ProductImage> productImages, double price, 

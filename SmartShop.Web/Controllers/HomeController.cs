@@ -41,9 +41,14 @@ namespace SmartShop.Web.Controllers
             return View();
         }
 
-        public ActionResult Details()
+        public ActionResult Details(Guid? id)
         {
-            return View();
+            if (!id.HasValue)
+            {
+                id = new Guid("457f340d-cd9a-ca80-b352-08d594da2b57");
+            }
+            var data = new ProductModel().GetProductDetais(id);
+            return View(data);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model SmartShop.Inventory.Product
 @{
     ViewBag.Title = "Details";
 }
@@ -28,27 +28,35 @@
                     </script>
                     <!-- //FlexSlider-->
                     }
-                    <ul class="slides">
-                        <li data-thumb="/Content/Images/d2.jpg">
-                            <div class="thumb-image"> <img src="~/Content/Images/d2.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                        </li>
-                        <li data-thumb="/Content/Images/d1.jpg">
-                            <div class="thumb-image"> <img src="~/Content/Images/d1.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                        </li>
-                        <li data-thumb="/Content/Images/d3.jpg">
-                            <div class="thumb-image"> <img src="~/Content/Images/d3.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                        </li>
-                        <li data-thumb="/Content/Images/d4.jpg">
-                            <div class="thumb-image"> <img src="~/Content/Images/d4.jpg" data-imagezoom="true" class="img-responsive"> </div>
-                        </li>
-                    </ul>
+                    @if (Model.ProductImages.Count == 0)
+                    {
+                        <ul class="slides">
+                            <li data-thumb="/Content/noImage.png">
+                                <div class="thumb-image"> <img src="~/Content/img/noImage.png" data-imagezoom="true" class="img-responsive"> </div>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="slides">
+                        @foreach (var images in Model.ProductImages)
+                        {
+
+                            <li data-thumb="@images.ImageUrl.TrimStart('~')">
+                                <div class="thumb-image"> <img src="@images.ImageUrl.TrimStart('~')" data-imagezoom="true" class="img-responsive"> </div>
+                            </li>
+
+                        }
+                        </ul>
+
+                    }
                     <div class="clearfix"></div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInRight;">
-            <h3>Asics Gel Zaraca 4 Blue Sport Shoes</h3>
-            <p><span class="item_price">$550</span> <del>- $900</del></p>
+            <h3>@Html.DisplayFor(item => item.Name)</h3>
+            <p><span class="item_price">@Html.DisplayFor(item => item.SpecialPrice)</span> <del>- @Html.DisplayFor(item => item.Price)</del></p>
             <div class="rating1">
                 <span class="starRating">
                     <input id="rating5" type="radio" name="rating" value="5">
@@ -81,15 +89,12 @@
             </div>
             <div class="occasional">
                 <h5>Types :</h5>
-                <div class="colr ert">
-                    <label class="radio"><input type="radio" name="radio" checked=""><i></i>Casual Shoes</label>
-                </div>
-                <div class="colr">
-                    <label class="radio"><input type="radio" name="radio"><i></i>Sports Shoes</label>
-                </div>
-                <div class="colr">
-                    <label class="radio"><input type="radio" name="radio"><i></i>Formal Shoes</label>
-                </div>
+                @foreach (var typeList in Model.ProductTypes)
+                {
+                    <div class="colr ert">
+                        <label class="radio"><input type="radio" name="radio" checked=""><i></i>@Html.DisplayFor(item => typeList.Name)</label>
+                    </div>
+                }
                 <div class="clearfix"> </div>
             </div>
             <div class="occasion-cart">
@@ -107,8 +112,15 @@
                     <li role="presentation" class="dropdown">
                         <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Information <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
-                            <li><a href="#dropdown1" tabindex="-1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">cleanse</a></li>
-                            <li><a href="#dropdown2" tabindex="-1" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2">fanny</a></li>
+                            @{ 
+                                int infoCount = 0;
+                            }
+                            @foreach (var infoList in Model.ProductAdditionalInformations)
+                            {
+                                infoCount++;
+                                <li><a href="#dropdown@(infoCount)" tabindex="-1" role="tab" id="dropdown@(infoCount)-tab" data-toggle="tab" aria-controls="dropdown@(infoCount)">@Html.DisplayFor(i => infoList.Name)</a></li>
+
+                            }
                         </ul>
                     </li>
                 </ul>
@@ -116,8 +128,7 @@
                     <div role="tabpanel" class="tab-pane fade in active bootstrap-tab-text" id="home" aria-labelledby="home-tab">
                         <h5>Product Brief Description</h5>
                         <p>
-                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-                            <span>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                            @Html.DisplayFor(item => item.Description)
                         </p>
                     </div>
                     <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="profile" aria-labelledby="profile-tab">
@@ -152,12 +163,19 @@
                             </div>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown1" aria-labelledby="dropdown1-tab">
-                        <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown2" aria-labelledby="dropdown2-tab">
-                        <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-                    </div>
+                   
+                    @{ infoCount = 0; } 
+                    
+                    @foreach (var infoList in Model.ProductAdditionalInformations)
+                    {
+                        infoCount++;
+                        <div role="tabpanel" class="tab-pane fade bootstrap-tab-text" id="dropdown@(infoCount)" aria-labelledby="dropdown@(infoCount)-tab">
+                            <p>
+                                @Html.DisplayFor(i => infoList.Description)
+                            </p>
+                        </div>
+                    }
+                    
                 </div>
             </div>
         </div>
