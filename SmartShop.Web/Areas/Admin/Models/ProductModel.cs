@@ -84,7 +84,7 @@ namespace SmartShop.Web.Areas.Admin.Models
                         imageFiles[i].SaveAs(HttpContext.Current.Server.MapPath(fullPath));
 
                         ProductImage image = new ProductImage();
-                        image.ImageUrl = fullPath;
+                        image.ImageUrl = fullPath.TrimStart('~');
                         image.OriginalName = originalName;
                         image.CurrentName = newName;
 

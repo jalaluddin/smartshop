@@ -43,7 +43,7 @@ namespace SmartShop.Web.Areas.Admin.Models
                         record.Quantity.ToString(),
                         ( (record.ProductImages != null)&&(record.ProductImages.Count != 0)
                             ?( record.ProductImages.Where(x => x.IsFeaturedImage).Count() != 0 
-                            ? record.ProductImages.Where(x => x.IsFeaturedImage).First().ImageUrl.ToString().TrimStart('~')
+                            ? record.ProductImages.Where(x => x.IsFeaturedImage).First().ImageUrl.ToString()
                             :"/Content/img/noImage.png")
                             : "/Content/img/noImage.png" ),
                         record.IsNew.ToString(),

@@ -12,5 +12,15 @@ namespace SmartShop.Web.Models
         {
             return new ProductManagementService().GetProductDetais(id.Value);
         }
+
+        public IEnumerable<Product> GetLatestDesignProductList()
+        {
+            return new ProductManagementService().GetLatestDesignProductList();
+        }
+
+        public IEnumerable<Product> GetSpacialOffersProductList()
+        {
+            return new ProductManagementService().GetSpacialOffersProductList();
+        }
     }
 }
