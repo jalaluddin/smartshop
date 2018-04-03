@@ -28,7 +28,7 @@ namespace SmartShop.Inventory
             return _productManagementUnitOfWork.ProductRepository.GetDynamic(out recordsTotal, out recordsFiltered,
                 x => x.Name.Contains(searchValue), sortColumnName + " " + sortDirection, "", index, length).ToList();
         }
-        public Product GetProductDetais(Guid id)
+        public Product GetProductDetails(Guid id)
         {
             return _productManagementUnitOfWork.ProductRepository.GetByID(id);
         }

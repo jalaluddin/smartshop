@@ -10,7 +10,7 @@ namespace SmartShop.Web.Models
     {
         public Product GetProductDetais(Guid? id)
         {
-            return new ProductManagementService().GetProductDetais(id.Value);
+            return new ProductManagementService().GetProductDetails(id.Value);
         }
 
         public IEnumerable<Product> GetLatestDesignProductList()
