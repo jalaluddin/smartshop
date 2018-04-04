@@ -8,40 +8,58 @@ namespace SmartShop.Inventory
 {
     public class ShoppingCart
     {
-        public List<CartItem> Items { get; private set; }
+        public List<CartItem> CartItems { get; private set; }
         public double TotalAmount
         {
             get
             {
-                return Items.Sum(x => (x.Item.SpecialPrice == 0 ? x.Item.Price : x.Item.SpecialPrice) * x.Quantity);
+                return CartItems.Sum(x => (x.Product.SpecialPrice == 0 ? x.Product.Price : x.Product.SpecialPrice) * x.Quantity);
             }
         }
 
         public ShoppingCart()
         {
-            Items = new List<CartItem>();
+            CartItems = new List<CartItem>();
         }
         public void RemoveItem(Guid productID)
         {
-            var item = Items.Where(x => x.Item.ID == productID).FirstOrDefault();
-            Items.Remove(item);
+            var item = CartItems.Where(x => x.Product.ID == productID).FirstOrDefault();
+            CartItems.Remove(item);
         }
         public void AddItem(CartItem cartItem)
         {
-            var item = Items.Where(x => x.Item.ID == cartItem.Item.ID).FirstOrDefault();
+            var item = CartItems.Where(x => x.Product.ID == cartItem.Product.ID).FirstOrDefault();
             if (item != null)
             {
                 item.IncreaseQuantity();
             }
             else
             {
-                Items.Add(cartItem);
+                CartItems.Add(cartItem);
+            }
+
+        }
+        public void IncreaseQuantityOfItem(Guid id)
+        {
+            var item = CartItems.Where(x => x.Product.ID == id).FirstOrDefault();
+            if (item != null)
+            {
+                item.IncreaseQuantity();
+            }
+
+        }
+        public void DecreaseQuantityOfItem(Guid id)
+        {
+            var item = CartItems.Where(x => x.Product.ID == id).FirstOrDefault();
+            if (item != null)
+            {
+                item.DecreaseQuantity();
             }
 
         }
         public void ClearCart()
         {
-            Items = new List<CartItem>();
+            CartItems = new List<CartItem>();
         }
     }
 }

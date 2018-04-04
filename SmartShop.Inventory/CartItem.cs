@@ -8,11 +8,11 @@ namespace SmartShop.Inventory
 {
     public class CartItem
     {
-        public Product Item { get; private set; }
+        public Product Product { get; private set; }
         public int Quantity { get; private set; }
         public CartItem(Product product)
         {
-            Item = product;
+            Product = product;
             Quantity = 1;
         }
         public void IncreaseQuantity()
@@ -21,7 +21,11 @@ namespace SmartShop.Inventory
         }
         public void DecreaseQuantity()
         {
-            Quantity--;
+            if (Quantity > 1)
+            {
+                Quantity--;
+            }
+            
         }
     }
 }

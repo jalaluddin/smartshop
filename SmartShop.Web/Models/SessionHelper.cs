@@ -8,7 +8,7 @@ namespace SmartShop.Web.Models
 {
     public static class SessionHelper
     {
-        public static ShoppingCart Cart
+        public static ShoppingCart ShoppingCart
         {
             get
             {

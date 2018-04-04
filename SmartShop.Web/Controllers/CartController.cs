@@ -22,5 +22,22 @@ namespace SmartShop.Web.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        public ActionResult MinusQuantity(Guid? id)
+        {
+            new CartModel().DecreaseQuantity(id);
+            return Redirect("/Checkout");
+        }
+
+        public ActionResult PlusQuantity(Guid? id)
+        {
+            new CartModel().IncreaseQuantity(id);
+            return Redirect("/Checkout");
+        }
+        public ActionResult RemoveItem(Guid? id)
+        {
+            new CartModel().RemoveCartItem(id);
+            return Redirect("/Checkout");
+        }
+
     }
 }

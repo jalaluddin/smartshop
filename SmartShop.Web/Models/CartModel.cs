@@ -14,13 +14,37 @@ namespace SmartShop.Web.Models
             {
                 var product = new ProductManagementService().GetProductDetails(productID.Value);
                 CartItem item = new CartItem(product);
-                SessionHelper.Cart.AddItem(item);
+                SessionHelper.ShoppingCart.AddItem(item);
             }
         }
 
         public void ResetCart()
         {
-            new ShoppingCart().ClearCart();
+            SessionHelper.ShoppingCart.ClearCart();
+        }
+
+        public void DecreaseQuantity(Guid? id)
+        {
+            if (id.HasValue)
+            {
+                SessionHelper.ShoppingCart.DecreaseQuantityOfItem(id.Value);
+            }
+        }
+
+        public void IncreaseQuantity(Guid? id)
+        {
+            if (id.HasValue)
+            {
+                SessionHelper.ShoppingCart.IncreaseQuantityOfItem(id.Value);
+            }
+        }
+
+        public void RemoveCartItem(Guid? id)
+        {
+            if (id.HasValue)
+            {
+                SessionHelper.ShoppingCart.RemoveItem(id.Value);
+            }
         }
     }
 }
