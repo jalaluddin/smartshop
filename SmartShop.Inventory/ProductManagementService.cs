@@ -32,7 +32,10 @@ namespace SmartShop.Inventory
         {
             return _productManagementUnitOfWork.ProductRepository.GetByID(id);
         }
-
+        public IEnumerable<Product> GetProductList()
+        {
+            return _productManagementUnitOfWork.ProductRepository.Get();
+        }
         public void AddProduct(string name,List<ProductImage> productImages, double price, 
             Guid productCategoryId, double specialPrice, int quantity, string description, bool isNew,
             List<ProductType> productTypes, List<ProductAdditionalInformation> productAdditionalInformations)

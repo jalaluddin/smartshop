@@ -68,12 +68,17 @@
     <Compile Include="ProductReviews.cs" />
     <Compile Include="ProductType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseHistory.cs" />
     <Compile Include="ShoppingCart.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SmartShop.Data\SmartShop.Data.csproj">
       <Project>{74130dea-ea7b-486e-addc-12a8bff6b5e9}</Project>
       <Name>SmartShop.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartShop.Foundation\SmartShop.Foundation.csproj">
+      <Project>{05B640D1-6B9F-4743-BBF2-5C38EC16D290}</Project>
+      <Name>SmartShop.Foundation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
