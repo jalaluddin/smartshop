@@ -1,4 +1,4 @@
-﻿
+﻿@using SmartShop.Web.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
@@ -15,7 +15,13 @@
 <div class="checkout">
     <div class="container">
         <h3>My Shopping Bag</h3>
-        <div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
+        @if (SessionHelper.ShoppingCart.CartItems.Count == 0)
+        {
+            <center>No Item Available</center>
+        }
+        else
+        {
+            <div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
             <table class="timetable_sub">
                 <thead>
                     <tr>
@@ -26,106 +32,71 @@
                         <th>Price</th>
                     </tr>
                 </thead>
-                <tr class="rem1">
+                @foreach (var cartProduct in SessionHelper.ShoppingCart.CartItems)
+                {
+                    <tr class="rem1">
                     <td class="invert-closeb">
                         <div class="rem">
-                            <div class="close1"> </div>
+                            <a href="/Cart/RemoveItem/@cartProduct.Product.ID"><div class="close1"> </div></a>
                         </div>
                     </td>
-                    <td class="invert-image"><a href="single.html"><img src="Content/images/w4.png" alt=" " class="img-responsive" /></a></td>
+                    <td class="invert-image">
+                        <a href="/Home/Details/@cartProduct.Product.ID" target="_blank">
+                        @if (cartProduct.Product.ProductImages.Where(x => x.IsFeaturedImage).Count() == 0)
+                        {
+                            <img src="/img/noImage.png" alt=" " class="img-responsive"  style="width:50px;"/>
+                        }
+                        else
+                        {
+                            foreach (var image in cartProduct.Product.ProductImages.Where(x => x.IsFeaturedImage))
+                            {
+                                <img src="@image.ImageUrl" alt="No Image" class="img-responsive" style="width:50px;"/>
+                            }
+                        }
+                        
+                        </a></td>
                     <td class="invert">
                         <div class="quantity">
                             <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Hand Bag</td>
-                    <td class="invert">$45.99</td>
-                </tr>
-                <tr class="rem2">
-                    <td class="invert-closeb">
-                        <div class="rem">
-                            <div class="close2"> </div>
-                        </div>
-                    </td>
-                    <td class="invert-image"><a href="single.html"><img src="/content/images/ep3.png" alt=" " class="img-responsive" /></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Watches</td>
-                    <td class="invert">$45.99</td>
+                                <a href="/Cart/MinusQuantity/@cartProduct.Product.ID"><div class="entry value-minus">&nbsp;</div></a>
+                                
+                                <div class="entry value"><span>@cartProduct.Quantity</span></div>
+                                <a href="/Cart/PlusQuantity/@cartProduct.Product.ID"><div class="entry value-plus active">&nbsp;</div></a>
 
-                </tr>
-                <tr class="rem3">
-                    <td class="invert-closeb">
-                        <div class="rem">
-                            <div class="close3"> </div>
-                        </div>
-                    </td>
-                    <td class="invert-image"><a href="single.html"><img src="/content/images/w2.png" alt=" " class="img-responsive" /></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
                             </div>
                         </div>
                     </td>
-                    <td class="invert">Sandals</td>
-                    <td class="invert">$45.99</td>
+                    <td class="invert">@cartProduct.Product.Name</td>
+                    <td class="invert">@(cartProduct.Product.SpecialPrice == 0 ? cartProduct.Product.Price : cartProduct.Product.SpecialPrice)</td>
+                    </tr>
+                }
 
-                </tr>
-                <tr class="rem4">
-                    <td class="invert-closeb">
-                        <div class="rem">
-                            <div class="close4"> </div>
-                        </div>
-                    </td>
-                    <td class="invert-image"><a href="single.html"><img src="/content/images/w1.png" alt=" " class="img-responsive" /></a></td>
-                    <td class="invert">
-                        <div class="quantity">
-                            <div class="quantity-select">
-                                <div class="entry value-minus">&nbsp;</div>
-                                <div class="entry value"><span>1</span></div>
-                                <div class="entry value-plus active">&nbsp;</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="invert">Wedges</td>
-                    <td class="invert">$45.99</td>
-
-                </tr>
 
                 <!--quantity-->
                 
                 <!--quantity-->
             </table>
-        </div>
+        </div>}
         <div class="checkout-left">
 
             <div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
-                <a href="mens.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Back To Shopping</a>
+                <a href="/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Back To Shopping</a>
             </div>
-            <div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
+            @if (SessionHelper.ShoppingCart.CartItems.Count != 0)
+            {
+                <div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
                 <h4>Shopping basket</h4>
                 <ul>
-                    <li>Hand Bag <i>-</i> <span>$45.99</span></li>
-                    <li>Watches <i>-</i> <span>$45.99</span></li>
-                    <li>Sandals <i>-</i> <span>$45.99</span></li>
-                    <li>Wedges <i>-</i> <span>$45.99</span></li>
-                    <li>Total <i>-</i> <span>$183.96</span></li>
+                    @foreach(var item in SessionHelper.ShoppingCart.CartItems){
+                    
+                        <li>@item.Product.Name<i>-</i> <span>@(item.Quantity*(item.Product.SpecialPrice==0 ? item.Product.Price : item.Product.SpecialPrice))</span></li>
+                        
+                        
+                    }
+                    <li>Total <i>-</i> <span>@SessionHelper.ShoppingCart.TotalAmount</span></li>
                 </ul>
-            </div>
+                </div>
+            }
             <div class="clearfix"> </div>
         </div>
     </div>
@@ -134,42 +105,42 @@
 
 @section scripts{
    <script>
-                        $(function () {
-                            $('.value-plus').on('click', function () {
-                                var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
-                                divUpd.text(newVal);
-                            });
+        $(function () {
+            $('.value-plus').on('click', function () {
+                var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) + 1;
+                divUpd.text(newVal);
+            });
 
-                            $('.value-minus').on('click', function () {
-                                var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) - 1;
-                                if (newVal >= 1) divUpd.text(newVal);
-                            });
+            $('.value-minus').on('click', function () {
+                var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10) - 1;
+                if (newVal >= 1) divUpd.text(newVal);
+            });
 
-                            $('.close4').on('click', function (c) {
-                                $('.rem4').fadeOut('slow', function (c) {
-                                    $('.rem4').remove();
-                                });
-                            });
+            $('.close4').on('click', function (c) {
+                $('.rem4').fadeOut('slow', function (c) {
+                    $('.rem4').remove();
+                });
+            });
 
-                            $('.close3').on('click', function (c) {
-                                $('.rem3').fadeOut('slow', function (c) {
-                                    $('.rem3').remove();
-                                });
-                            });
+            $('.close3').on('click', function (c) {
+                $('.rem3').fadeOut('slow', function (c) {
+                    $('.rem3').remove();
+                });
+            });
 
-                            $('.close2').on('click', function (c) {
-                                $('.rem2').fadeOut('slow', function (c) {
-                                    $('.rem2').remove();
-                                });
-                            });
+            $('.close2').on('click', function (c) {
+                $('.rem2').fadeOut('slow', function (c) {
+                    $('.rem2').remove();
+                });
+            });
 
 
-                            $('.close1').on('click', function (c) {
-                                $('.rem1').fadeOut('slow', function (c) {
-                                    $('.rem1').remove();
-                                });
-                            });
-                        });
+            $('.close1').on('click', function (c) {
+                $('.rem1').fadeOut('slow', function (c) {
+                    $('.rem1').remove();
+                });
+            });
+        });
   </script>
 }
 

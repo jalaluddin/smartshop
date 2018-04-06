@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartItem.cs" />
     <Compile Include="Migrations\201803271020229_InitialCreate.cs" />
     <Compile Include="Migrations\201803271020229_InitialCreate.Designer.cs">
       <DependentUpon>201803271020229_InitialCreate.cs</DependentUpon>
@@ -67,6 +68,7 @@
     <Compile Include="ProductReviews.cs" />
     <Compile Include="ProductType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCart.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SmartShop.Data\SmartShop.Data.csproj">
