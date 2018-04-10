@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,22 @@ namespace SmartShop.Inventory
     public class ProductManagementService
     {
         private ProductManagementContext _context;
-        private ProductManagementUnitOfWork _productManagementUnitOfWork;
+        private IProductManagementUnitOfWork _productManagementUnitOfWork;
 
-        private ProductCategoryManagementUnitOfWork _productCategoryManagementUnitOfWork;
+        private IProductCategoryManagementUnitOfWork _productCategoryManagementUnitOfWork;
 
         public ProductManagementService()
         {
             _context = new ProductManagementContext();
             _productManagementUnitOfWork = new ProductManagementUnitOfWork(_context);
             _productCategoryManagementUnitOfWork = new ProductCategoryManagementUnitOfWork(_context);
+        }
+        [Inject]
+        public ProductManagementService(IProductManagementUnitOfWork productManagementUnitOfWork, 
+            IProductCategoryManagementUnitOfWork productCategoryManagementUnitOfWork)
+        {
+            _productManagementUnitOfWork = productManagementUnitOfWork;
+            _productCategoryManagementUnitOfWork = productCategoryManagementUnitOfWork;
         }
         public List<Product> GetPagedProducts(int index, int length, string searchValue,
             string sortColumnName, string sortDirection, out int recordsTotal, out int recordsFiltered)

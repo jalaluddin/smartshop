@@ -15,6 +15,11 @@ namespace SmartShop.Inventory
             Product = product;
             Quantity = 1;
         }
+        public CartItem(Product product, int quantity)
+        {
+            Product = product;
+            Quantity = quantity;
+        }
         public void IncreaseQuantity()
         {
             Quantity++;
