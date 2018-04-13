@@ -30,6 +30,10 @@ namespace SmartShop.Inventory
             {
                 Quantity--;
             }
+            else
+            {
+                throw new Exception();
+            }
             
         }
     }
