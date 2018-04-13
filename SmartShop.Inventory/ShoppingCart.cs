@@ -53,7 +53,15 @@ namespace SmartShop.Inventory
             var item = CartItems.Where(x => x.Product.ID == id).FirstOrDefault();
             if (item != null)
             {
-                item.DecreaseQuantity();
+                try
+                {
+                    item.DecreaseQuantity();
+                }
+                catch
+                {
+                    RemoveItem(id);
+                }
+                
             }
 
         }

@@ -51,5 +51,21 @@ namespace SmartShop.Inventory.Tests
             //Assert
             Assert.AreEqual(expectedTotal, actualTotal);
         }
+
+        [TestMethod]
+        public void IncreaseQuantityOfItem_IfProductWithIdExists_IncreasesQuantityByOne()
+        {
+            //Arrange
+            var productId = new Guid();
+            var cart = new ShoppingCart();
+            cart.AddItem(new CartItem(new Product() { ID = productId }, 5));
+            cart.AddItem(new CartItem(new Product()));
+
+            //Act
+            cart.IncreaseQuantityOfItem(productId);
+
+            //Assert
+            Assert.AreEqual(6, cart.CartItems.Find(x => x.Product.ID == productId).Quantity);
+        }
     }
 }
