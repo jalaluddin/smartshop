@@ -3,7 +3,7 @@
     public interface IProductManagementUnitOfWork
     {
         ProductImageRepository ProductImageRepository { get; set; }
-        ProductRepository ProductRepository { get; set; }
+        IProductRepository ProductRepository { get; set; }
         void Dispose();
         void Save();
     }

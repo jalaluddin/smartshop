@@ -9,7 +9,8 @@ namespace SmartShop.Inventory
 {
     public class ProductCategoryManagementUnitOfWork : UnitOfWork, IProductCategoryManagementUnitOfWork
     {
-        public ProductCategoryRepository ProductCategoryRepository { get; set; }
+        public IProductCategoryRepository ProductCategoryRepository { get; set; }
+
         public ProductCategoryManagementUnitOfWork(ProductManagementContext context) : base(context)
         {
             ProductCategoryRepository = new ProductCategoryRepository(context);

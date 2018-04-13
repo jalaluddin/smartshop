@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="CartItem.cs" />
     <Compile Include="IProductCategoryManagementUnitOfWork.cs" />
+    <Compile Include="IProductCategoryRepository.cs" />
     <Compile Include="IProductManagementUnitOfWork.cs" />
+    <Compile Include="IProductRepository.cs" />
     <Compile Include="Migrations\201803271020229_InitialCreate.cs" />
     <Compile Include="Migrations\201803271020229_InitialCreate.Designer.cs">
       <DependentUpon>201803271020229_InitialCreate.cs</DependentUpon>

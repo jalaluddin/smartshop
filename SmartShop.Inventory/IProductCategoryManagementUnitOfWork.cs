@@ -2,7 +2,7 @@
 {
     public interface IProductCategoryManagementUnitOfWork
     {
-        ProductCategoryRepository ProductCategoryRepository { get; set; }
+        IProductCategoryRepository ProductCategoryRepository { get; set; }
 
         void Dispose();
         void Save();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartShop.Inventory
 {
-    public class ProductRepository : Repository<Product>
+    public class ProductRepository : Repository<Product>, IProductRepository
     {
         private ProductManagementContext _context;
         public ProductRepository(ProductManagementContext context)
